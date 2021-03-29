@@ -14,6 +14,7 @@ Removes the need for manual delivery.
 
 # How
 __What kind of technology are we going to use?__
+
 We will be using a database for tracking data of the cars.
 
 We will program in Java and C++ with GUI implementation in javafx and perhaps Android Studio
