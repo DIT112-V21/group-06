@@ -4,8 +4,11 @@ A semi-automated delivery system
 # Why
 ##### What problems does it solve?
 Makes delivery faster, safer and more accessible
+
 Aids with keeping social distance.
+
 Makes delivery more consistent
+
 Removes the need for manual delivery
 
 # How
