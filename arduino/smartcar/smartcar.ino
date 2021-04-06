@@ -60,15 +60,17 @@ void handleInput()
 void autoStop(){
   
   if(front.getDistance() < 1000 && front.getDistance() > 0){ 
-                car.setSpeed(-10);
-                delay(1000);
+                car.setSpeed(-50);
+                delay(3000);
                 car.setSpeed(0);
                 
         }
         Serial.println(front.getDistance());
   
   if(sideBackIR.getDistance() < 120 && sideBackIR.getDistance() > 0){ 
-                car.setSpeed(10);
+                car.setSpeed(50);
+                delay(3000);
+                car.setSpeed(0);
                 
         }
   }
