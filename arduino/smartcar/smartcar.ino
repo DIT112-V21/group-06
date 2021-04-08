@@ -64,8 +64,8 @@ void loop() {
 }
 
 void autoStop(){
-  
-  if(front.getDistance() < 120 && front.getDistance() > 0){ 
+  int distance = front.getDistance();
+  if(distance < 120 && distance > 0){ 
                 car.setSpeed(-50);
                 delay(3000);
                 car.setSpeed(0);
@@ -73,7 +73,8 @@ void autoStop(){
         }
         Serial.println(front.getDistance());
   
-  if(sideBackIR.getDistance() < 120 && sideBackIR.getDistance() > 0){ 
+  int backDistance = sideBackIR.getDistance();
+  if(backDistance < 120 && backDistance > 0){ 
                 car.setSpeed(50);
                 delay(3000);
                 car.setSpeed(0);
