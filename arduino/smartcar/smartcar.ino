@@ -24,7 +24,8 @@ const auto echoPin = 7;
 const auto maxDistance = 2000;
 SR04 front(arduinoRuntime, triggerPin, echoPin, maxDistance);
 
-bool x = true;
+bool canDriveForward = true;
+bool canDriveBackwards = true;
 
 void setup() {
   
@@ -40,7 +41,15 @@ void setup() {
     mqtt.subscribe("/smartcar/control/#", 1);
     mqtt.onMessage([](String topic, String message) {
       if (topic == "/smartcar/control/throttle") {
-        car.setSpeed(message.toInt());
+        if (canDriveForward && message.toInt() >= 0){
+          car.setSpeed(message.toInt());
+          } 
+          
+        if (canDriveBackwards && message.toInt() <= 0){
+            car.setSpeed(message.toInt());
+            }
+        
+            
       } else if (topic == "/smartcar/control/steering") {
         car.setAngle(message.toInt());
       } else {
@@ -66,18 +75,27 @@ void loop() {
 void autoStop(){
   int distance = front.getDistance();
   if(distance < 120 && distance > 0){ 
-                car.setSpeed(-50);
-                delay(3000);
-                car.setSpeed(0);
-                
-        }
+           if(canDriveForward){
+                car.setSpeed(0);   
+                canDriveForward = false;
+                Serial.println("cannot drive frontward");
+           }       
+        }else{
+           canDriveForward = true;
+           Serial.println("can drive frontward");
+          }
         Serial.println(front.getDistance());
   
   int backDistance = sideBackIR.getDistance();
   if(backDistance < 120 && backDistance > 0){ 
-                car.setSpeed(50);
-                delay(3000);
-                car.setSpeed(0);
+              if(canDriveBackwards){
+                car.setSpeed(0);   
+                canDriveBackwards = false;
+                Serial.println("cannot drive backwards");
+           }       
+        }else{
+           canDriveBackwards = true;
+           Serial.println("can drive backwards");
+          }
                 
         }
-  }
