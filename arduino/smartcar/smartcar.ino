@@ -1,78 +1,102 @@
+#include <MQTT.h>
+#include <WiFi.h>
 #include <Smartcar.h>
+
+#ifndef __SMCE__
+WiFiClient net;
+#endif
+MQTTClient mqtt;
 
 ArduinoRuntime arduinoRuntime;
 BrushedMotor leftMotor(arduinoRuntime, smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(arduinoRuntime, smartcarlib::pins::v2::rightMotorPins);
 DifferentialControl control(leftMotor, rightMotor);
 
-// const int frontPin = 0;
-// GP2Y0A02 sideFrontIR(arduinoRuntime,
-//                     frontPin); 
+SimpleCar car(control);
+
 
 const int backPin = 3;
 GP2Y0A02 sideBackIR(arduinoRuntime,
                     backPin); 
 
-const int TRIGGER_PIN           = 6; // D6
-const int ECHO_PIN              = 7; // D7
-const unsigned int MAX_DISTANCE = 2000;
-SR04 front(arduinoRuntime, TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+const auto triggerPin = 6;
+const auto echoPin = 7;
+const auto maxDistance = 2000;
+SR04 front(arduinoRuntime, triggerPin, echoPin, maxDistance);
 
+bool canDriveForward = true;
+bool canDriveBackwards = true;
 
-SimpleCar car(control);
+void setup() {
+  
+  Serial.begin(9600);
+#ifdef __SMCE__
+  
+  mqtt.begin("aerostun.dev", 1883, WiFi);
+  // mqtt.begin(WiFi); // Will connect to localhost
+#else
+  mqtt.begin(net);
+#endif
+  if (mqtt.connect("arduino", "public", "public")) {
+    mqtt.subscribe("/smartcar/control/#", 1);
+    mqtt.onMessage([](String topic, String message) {
+      if (topic == "/smartcar/control/throttle") {
+        if (canDriveForward && message.toInt() >= 0){
+          car.setSpeed(message.toInt());
+          } 
+          
+        if (canDriveBackwards && message.toInt() <= 0){
+            car.setSpeed(message.toInt());
+            }
+        
+            
+      } else if (topic == "/smartcar/control/steering") {
+        car.setAngle(message.toInt());
+      } else {
+        Serial.println(topic + " " + message);
+      }
+    });
+  }
 
-void setup()
-{
-    Serial.begin(9600);
-    Serial.setTimeout(200);
+  
 }
 
-void loop()
-{
-    handleInput();
-    autoStop();
-    delay(100);
-   
-}
+void loop() {
+  
+  if (mqtt.connected()) { //the car is stupid and drives when starting
+    mqtt.loop();
+    // const auto currentTime = millis();
+  }
+  autoStop();
+  delay(35);
 
-void handleInput()
-{
-    // handle serial input if there is any
-    if (Serial.available())
-    {
-        String input = Serial.readStringUntil('\n');
-        if (input.startsWith("m"))
-        {
-            int throttle = input.substring(1).toInt(); 
-            car.setSpeed(throttle);
-        }
-        else if (input.startsWith("t"))
-        {
-            int deg = input.substring(1).toInt();
-            car.setAngle(deg);
-        }
-        
-        
-    }
-   
 }
 
 void autoStop(){
-  
   int distance = front.getDistance();
   if(distance < 120 && distance > 0){ 
-                car.setSpeed(-50);
-                delay(3000);
-                car.setSpeed(0);
-                
-        }
+           if(canDriveForward){
+                car.setSpeed(0);   
+                canDriveForward = false;
+                Serial.println("cannot drive frontward");
+           }       
+        }else{
+           canDriveForward = true;
+           Serial.println("can drive frontward");
+          }
         Serial.println(front.getDistance());
   
   int backDistance = sideBackIR.getDistance();
   if(backDistance < 120 && backDistance > 0){ 
-                car.setSpeed(50);
-                delay(3000);
-                car.setSpeed(0);
+              if(canDriveBackwards){
+                car.setSpeed(0);   
+                canDriveBackwards = false;
+                Serial.println("cannot drive backwards");
+           }       
+        }else{
+           canDriveBackwards = true;
+           Serial.println("can drive backwards");
+          }
                 
         }
-  }
+
