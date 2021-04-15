@@ -19,12 +19,15 @@ export function right(){
   client.publish('/smartcar/control/steering', '20')
 }
 
+export function stopTurn(){
+  client.publish('/smartcar/control/steering', '0')
+}
+
+export function stopSpeed(){
+  client.publish('/smartcar/control/throttle', '0')
+}
+
 export function breakSpeed(){
   client.publish('/smartcar/control/throttle', '0')
   client.publish('/smartcar/control/steering', '0')
-
-
 }
-
-
-

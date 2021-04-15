@@ -6,6 +6,7 @@ import * as publisher from '../publisher'
 
 function CarControl() {
   const onKeyDown = (event) => {
+    if(event.repeat){return}
     switch(event.keyCode) {
       case 87://W
       publisher.forward()
@@ -24,9 +25,28 @@ function CarControl() {
         break;
     }
   }
+  const onKeyUp = (event) => {
+    switch(event.keyCode) {
+      case 87://W
+      publisher.stopSpeed()
+        break;
+      case 83://S
+      publisher.stopSpeed()
+        break;
+      case 65://A
+      publisher.stopTurn()
+        break;
+      case 68://D
+      publisher.stopTurn()
+        break;
+      case 32://Space
+      publisher.breakSpeed()
+        break;
+    }
+  }
 
   return (
-    <div className="CarControl" tabIndex="0" onKeyDown={(e) => onKeyDown(e)}>
+    <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
       
       <header className="CarControl-header">
         <p>
@@ -36,9 +56,9 @@ function CarControl() {
         <p>
         <Button text='W' onClick={publisher.forward} className='dirBtn'/>
         <br/>
-        <Button text='A' onClick={publisher.left} className='dirBtn'/>
+        <Button text='A' onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn'/>
         <Button text='S' onClick={publisher.backward} className='dirBtn'/>
-        <Button text='D' onClick={publisher.right} className='dirBtn'/>
+        <Button text='D' onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn'/>
         <br/>
         <Button text='STOP' color='red' onClick={publisher.breakSpeed} className='btn'/></p>
       </header>
