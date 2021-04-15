@@ -5,7 +5,6 @@ var client  = mqtt.connect('ws://127.0.0.1:9001')
   
 export function forward(){
   client.publish('/smartcar/control/throttle', '50')
-  console.log('peron')
 }
 
 export function backward(){
