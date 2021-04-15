@@ -3,10 +3,31 @@ import Button from './Button'
 import * as publisher from '../publisher'
 
 
+
 function CarControl() {
+  const onKeyDown = (event) => {
+    switch(event.keyCode) {
+      case 87://W
+      publisher.forward()
+        break;
+      case 83://S
+      publisher.backward()
+        break;
+      case 65://A
+      publisher.left()
+        break;
+      case 68://D
+      publisher.right()
+        break;
+      case 32://Space
+      publisher.breakSpeed()
+        break;
+    }
+  }
 
   return (
-    <div className="CarControl">
+    <div className="CarControl" tabIndex="0" onKeyDown={(e) => onKeyDown(e)}>
+      
       <header className="CarControl-header">
         <p>
           Group06 :)))
