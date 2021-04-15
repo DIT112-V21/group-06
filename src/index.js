@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './Css/index.css';
+import CarControl from './Components/CarControl';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CarControl />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,44 @@
+.CarControl {
+    text-align: center;
+  }
+  
+  .CarControl-header {
+    background-color: #354972;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  
+  .btn {
+    background-color: hsl(121, 44%, 40%); 
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 95%;
+  }
+  .dirBtn {
+    background-color: hsl(122, 41%, 45%); 
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 25px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+  }
+  
+
+  
