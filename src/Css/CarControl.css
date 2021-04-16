@@ -13,9 +13,12 @@
     color: white;
   }
   
+  .helpText {
+font-size: 12px;
+  }
   
   .btn {
-    background-color: hsl(121, 44%, 40%); 
+    background-color: #770404; 
     border: none;
     border-radius: 4px;
     color: white;

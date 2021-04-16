@@ -8,7 +8,7 @@ export function forward(){
 }
 
 export function backward(){
-  client.publish('/smartcar/control/throttle', '-100')
+  client.publish('/smartcar/control/throttle', '-50')
 }
 
 export function left(){

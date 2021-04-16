@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 
 const Button = ({text, color, onClick, onMouseDown, onMouseUp, className}) => {
     return (
-        <button onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} style={{backgroundColor: color}} className={className} >
+        <button onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} style={{backgroundColor: color}} className={className} id = {text} >
            {text}
         </button>
     )
