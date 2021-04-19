@@ -16,6 +16,7 @@ function CarControl() {
 
   const onKeyDown = (event) => {
     if(event.repeat){return}
+    // eslint-disable-next-line
     switch(event.keyCode) {
       case 87://W
       publisher.forward()
@@ -40,6 +41,7 @@ function CarControl() {
     }
   }
   const onKeyUp = (event) => {
+    // eslint-disable-next-line
     switch(event.keyCode) {
       case 87://W
       publisher.stopSpeed()
