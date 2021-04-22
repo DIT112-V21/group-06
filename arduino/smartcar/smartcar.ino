@@ -24,15 +24,14 @@ const auto echoPin = 7;
 const auto maxDistance = 2000;
 SR04 front(arduinoRuntime, triggerPin, echoPin, maxDistance);
 
-bool canDriveForward = true;
-bool canDriveBackwards = true;
+bool x = true;
 
 void setup() {
   
   Serial.begin(9600);
 #ifdef __SMCE__
   
-  mqtt.begin("aerostun.dev", 1883, WiFi);
+  mqtt.begin("127.0.0.1", 1883, WiFi);
   // mqtt.begin(WiFi); // Will connect to localhost
 #else
   mqtt.begin(net);
@@ -41,15 +40,7 @@ void setup() {
     mqtt.subscribe("/smartcar/control/#", 1);
     mqtt.onMessage([](String topic, String message) {
       if (topic == "/smartcar/control/throttle") {
-        if (canDriveForward && message.toInt() >= 0){
-          car.setSpeed(message.toInt());
-          } 
-          
-        if (canDriveBackwards && message.toInt() <= 0){
-            car.setSpeed(message.toInt());
-            }
-        
-            
+        car.setSpeed(message.toInt());
       } else if (topic == "/smartcar/control/steering") {
         car.setAngle(message.toInt());
       } else {
@@ -62,7 +53,7 @@ void setup() {
 }
 
 void loop() {
-  
+  car.setSpeed(0);
   if (mqtt.connected()) { //the car is stupid and drives when starting
     mqtt.loop();
     // const auto currentTime = millis();
@@ -73,30 +64,19 @@ void loop() {
 }
 
 void autoStop(){
-  int distance = front.getDistance();
-  if(distance < 120 && distance > 0){ 
-           if(canDriveForward){
-                car.setSpeed(0);   
-                canDriveForward = false;
-                Serial.println("cannot drive frontward");
-           }       
-        }else{
-           canDriveForward = true;
-           Serial.println("can drive frontward");
-          }
-        Serial.println(front.getDistance());
   
-  int backDistance = sideBackIR.getDistance();
-  if(backDistance < 120 && backDistance > 0){ 
-              if(canDriveBackwards){
-                car.setSpeed(0);   
-                canDriveBackwards = false;
-                Serial.println("cannot drive backwards");
-           }       
-        }else{
-           canDriveBackwards = true;
-           Serial.println("can drive backwards");
-          }
+  if(front.getDistance() < 120 && front.getDistance() > 0){ 
+    car.setSpeed(-50);
+    delay(3000);
+    car.setSpeed(0);
                 
-        }
-
+  }
+  Serial.println(front.getDistance());
+  
+  if(sideBackIR.getDistance() < 120 && sideBackIR.getDistance() > 0){ 
+    car.setSpeed(50);
+    delay(3000);
+    car.setSpeed(0);
+                
+  }
+}
