@@ -3,7 +3,7 @@ import Button from './Button'
 import { Link } from 'react-router-dom'
 
 
-function App() {
+function Home() {
 
   return (
       <header className="CarControl-header">
@@ -17,4 +17,4 @@ function App() {
   )
 }
 
-export default App;
+export default Home;
