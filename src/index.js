@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Css/index.css';
-import CarControl from './Components/CarControl';
+import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CarControl />
+    <BrowserRouter>
+    <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
