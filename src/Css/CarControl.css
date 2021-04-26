@@ -43,5 +43,10 @@ font-size: 12px;
     margin: 5px;
   }
   
-
+.cameraStream{
+  width: 640px; 
+  height: 480px;
+  background-color: white;
+  color: black;
+}
   

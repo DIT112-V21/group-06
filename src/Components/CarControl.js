@@ -2,7 +2,6 @@ import '../Css/CarControl.css';
 import Button from './Button'
 import * as publisher from '../publisher'
 
-
 function CarControl() {
   let useColor = '#0e4b25'
   let regularColor = '#39933b'
@@ -65,15 +64,15 @@ function CarControl() {
         break;
     }
   }
+ 
+
 
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
       
       <header className="CarControl-header">
-        <p>
-          Group06 :)))
-        </p>
-        <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
+        
+        <div className="cameraStream" id = "camera" >ööö</div>
         <p>
         <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn'/>
         <br/>
@@ -82,6 +81,10 @@ function CarControl() {
         <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn'/>
         <br/>
         <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn'/></p>
+        <p>
+          Group06 :)))
+        </p>
+        <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
       </header>
     </div>
   )
