@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "bmp-js": "^0.1.0",
+    "canvas": "^2.7.0",
     "kefir": "^3.8.8",
     "mqtt": "^4.2.6",
     "react": "^17.0.2",

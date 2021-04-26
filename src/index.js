@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './Css/index.css';
 import CarControl from './Components/CarControl';
 import reportWebVitals from './reportWebVitals';
-import './Components/imgStream'
 
 ReactDOM.render(
   <React.StrictMode>
