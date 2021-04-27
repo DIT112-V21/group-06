@@ -1,8 +1,8 @@
 import '../Css/CarControl.css';
 import Button from './Button'
-import * as publisher from '../publisher'
+import * as publisher from '../MqttController'
 
-function CarControl() {
+export function CarControl() {
   let useColor = '#0e4b25'
   let regularColor = '#39933b'
   let stopUseColor = '#770404'
@@ -12,7 +12,6 @@ function CarControl() {
   let leftButton = 'A'
   let rightButton = 'D'
   let stopButton = 'STOP'
-
 
 
   const onKeyDown = (event) => {
@@ -68,48 +67,7 @@ function CarControl() {
   }
 
 
-
-  //  function imageStream(message) {
-  //   let ctx = document.getElementById("img").getContext("2d")
-  //   ctx.drawImage(createImageBitmap(message))
-  // }
-  var mqtt = require('mqtt')
-  var client = mqtt.connect('ws://127.0.0.1:9001')
-
-
-  client.subscribe('/smartcar/camera') //{'test1': {qos: 0}
-
-
-  client.on('message', function (topic, message) {
-    // message is Buffer
-    console.log(message.length)
-    imageStream(message)
-    //  client.end()
-  })
-
-  function imageStream(message) {
-
-
-    let ctx = document.getElementById("img").getContext("2d")
-    let imageData = new ImageData(320,240)
-    let messageLenght = message.lenght / 3
-    
-    for (let ci = 0; ci < messageLenght; ++ci) {
-      let a = 255;
-      let r = message[3 * ci];
-      let g = message[3 * ci + 1];
-      let b = message[3 * ci + 2];
-      imageData.data[4 * ci] = 190
-      imageData.data[4 * ci + 1] = 0
-      imageData.data[4 * ci + 2] = 210
-      imageData.data[4 * ci + 3] = a
-
-    }
-    ctx.putImageData(imageData, 0, 0)
-    // ctx.beginPath();
-    // ctx.arc(95, 50, 40, 0, 2 * Math.PI);
-    // ctx.stroke();
-  }
+ 
 
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
@@ -133,5 +91,25 @@ function CarControl() {
     </div>
   )
 }
+
+export function imageStream(message) {
+
+  let ctx = document.getElementById("img").getContext("2d")
+  let imageData = ctx.createImageData(320, 240)
+  let messageLenght = 320 * 240
+  let ci = 0
+  for (ci = 0; ci < messageLenght; ++ci) {
+    let a = 255;
+    let r = message[3 * ci];
+    let g = message[3 * ci + 1];
+    let b = message[3 * ci + 2];
+    imageData.data[4 * ci] = r
+    imageData.data[4 * ci + 1] = g
+    imageData.data[4 * ci + 2] = b
+    imageData.data[4 * ci + 3] = a
+  }
+  ctx.putImageData(imageData, 0, 0)
+}
+
 
 export default CarControl;
