@@ -1,6 +1,11 @@
 #include <MQTT.h>
 #include <WiFi.h>
 #include <Smartcar.h>
+#include <vector> 
+
+#ifdef __SMCE__
+#include <OV767X.h>
+#endif
 
 #ifndef __SMCE__
 WiFiClient net;
@@ -14,6 +19,7 @@ DifferentialControl control(leftMotor, rightMotor);
 
 SimpleCar car(control);
 
+std::vector<char> frameBuffer; 
 
 const int backPin = 3;
 GP2Y0A02 sideBackIR(arduinoRuntime,
@@ -28,11 +34,15 @@ bool canDriveForward = true;
 bool canDriveBackwards = true;
 
 void setup() {
-  
   Serial.begin(9600);
+
+ 
+
 #ifdef __SMCE__
-  
-  mqtt.begin("aerostun.dev", 1883, WiFi);
+
+  Camera.begin(QVGA, RGB888, 0); //qvga is a format 320 X 240, QVGA, RGB888, 0
+  frameBuffer.resize(Camera.width() * Camera.height() * Camera.bytesPerPixel());
+  mqtt.begin("127.0.0.1", 1883, WiFi);
   // mqtt.begin(WiFi); // Will connect to localhost
 #else
   mqtt.begin(net);
@@ -66,6 +76,16 @@ void loop() {
   if (mqtt.connected()) { //the car is stupid and drives when starting
     mqtt.loop();
     // const auto currentTime = millis();
+    #ifdef __SMCE__
+    const auto currentTime = millis();
+    static auto previousFrame = 0UL;
+    if (currentTime - previousFrame >= 65) {
+      previousFrame = currentTime;
+      Camera.readFrame(frameBuffer.data());
+      mqtt.publish("/smartcar/camera", frameBuffer.data(), frameBuffer.size(),
+                   false, 0);
+    }
+    #endif
   }
   autoStop();
   delay(35);
