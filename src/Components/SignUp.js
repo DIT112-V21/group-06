@@ -1,8 +1,10 @@
-import '../Css/CarControl.css'; 
+import '../Css/SignUp.css'; 
 import Button from './Button'
 import * as publisher from '../publisher'   
+import TextField from './TextField'
 
-function Register() {   let cancelUseColor = '#bd3a62'   
+function SignUp() {   
+let cancelUseColor = '#bd3a62'   
 let cancelColor = '#fc5185'   
 let registerUseColor = '#2c898f'   
 let regColor = '#3fc1c9'   
@@ -43,6 +45,7 @@ const onKeyDown = (event) => {
     }
   }
 
+
   return (
     <div className="SignUp" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
 
@@ -50,12 +53,19 @@ const onKeyDown = (event) => {
         <p>
           Sign Up Form
         </p>
-        <p className='helpText'>Please enter your personal information.</p>
+        <p className='helpText'>Please enter your personal information on this TRUSTWORTHY site, trust us we will only use it for personal stuff</p>
         <p>
-        <br/>
-        <Button text={forwardButton} color = {regularColor} onClick={publisher.backward} className='regBtn'/>
-        <Button text={backwardButton} color = {regularColor} onClick={publisher.forward} className='canBtn'/>
-        <br/>
+        <p className='inputPrompt'>
+            Username
+            <TextField text="" />
+            Password
+            <TextField text="" type="password" />
+            <br/>
+            Email adress
+            <TextField text="" type="email" />
+            </p>
+            <Button text={cancelButton}  onClick={publisher.forward} id='canBtn'/>
+            <Button text={registerButton}  onClick={publisher.backward} id='regBtn'/>
         </p>
       </header>
     </div>
