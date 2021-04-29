@@ -2,6 +2,7 @@ import '../Css/LogIn.css';
 import Button from './Button'
 import * as publisher from '../publisher'   
 import TextField from './TextField'
+import { Link } from 'react-router-dom'
 
 
 function LogIn() {   
@@ -10,7 +11,7 @@ let cancelColor = '#fc5185'
 let registerUseColor = '#2c898f'   
 let regColor = '#3fc1c9'   
 let registerButton = 'Log In'   
-let cancelButton = 'Cancel'     
+let cancelButton = 'Sign Up'     
 
 
 
@@ -61,10 +62,13 @@ const onKeyDown = (event) => {
             <TextField text="" />
             Password
             <TextField text="" type="password" />
-            <br/>
             </p>
-            <Button text={cancelButton}  onClick={publisher.forward} id='canBtn'/>
+            <Link to="/signUp">
+            <Button text={cancelButton}  onClick={publisher.forward} id='signBtn'/>
+            </Link>
+            <Link to="/carControl">
             <Button text={registerButton}  onClick={publisher.backward} id='logBtn'/>
+            </Link>
         </p>
       </header>
     </div>

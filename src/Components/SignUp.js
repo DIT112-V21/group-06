@@ -2,6 +2,8 @@ import '../Css/SignUp.css';
 import Button from './Button'
 import * as publisher from '../publisher'   
 import TextField from './TextField'
+import { Link } from 'react-router-dom'
+
 
 function SignUp() {   
 let cancelUseColor = '#bd3a62'   
@@ -64,8 +66,12 @@ const onKeyDown = (event) => {
             Email adress
             <TextField text="" type="email" />
             </p>
+            <Link to="/logIn">
             <Button text={cancelButton}  onClick={publisher.forward} id='canBtn'/>
+            </Link>
+            <Link to="/logIn">
             <Button text={registerButton}  onClick={publisher.backward} id='regBtn'/>
+            </Link>
         </p>
       </header>
     </div>
