@@ -1,8 +1,11 @@
 #include <MQTT.h>
 #include <WiFi.h>
 #include <Smartcar.h>
-#include <OV767X.h> 
 #include <vector> 
+
+#ifdef __SMCE__
+#include <OV767X.h>
+#endif
 
 #ifndef __SMCE__
 WiFiClient net;
