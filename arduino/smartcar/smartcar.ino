@@ -32,7 +32,7 @@ bool canDriveBackwards = true;
 
 void setup() {
   Serial.begin(9600);
-  Camera.begin(QVGA, RGB888, 0); //qvga is a format 320 X 240
+  Camera.begin(QVGA, RGB888, 0); //qvga is a format 320 X 240, QVGA, RGB888, 0
   frameBuffer.resize(Camera.width() * Camera.height() * Camera.bytesPerPixel());
 
 #ifdef __SMCE__
