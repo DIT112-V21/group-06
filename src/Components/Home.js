@@ -9,7 +9,7 @@ function Home() {
       <header className="CarControl-header">
         <p>
           Group06 :)))
-          <Link to="/carcontrol">    
+          <Link to="/logIn">    
          <Button text='bazonk' color='blue' className='btn'/>
           </Link>
           </p>

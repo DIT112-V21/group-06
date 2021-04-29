@@ -1,6 +1,7 @@
 import '../Css/CarControl.css';
 import Button from './Button'
 import * as publisher from '../publisher'
+import { Link } from 'react-router-dom'
 
 
 function CarControl() {
@@ -81,7 +82,11 @@ function CarControl() {
         <Button text={backwardButton} color = {regularColor} onClick={publisher.backward} className='dirBtn'/>
         <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn'/>
         <br/>
-        <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn'/></p>
+        <Link to="/logIn">
+        <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn'/>
+        
+        </Link>
+        </p>
       </header>
     </div>
   )
