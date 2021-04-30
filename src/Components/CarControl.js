@@ -1,6 +1,6 @@
 import '../Css/CarControl.css';
 import Button from './Button'
-import * as publisher from '../publisher'
+import * as publisher from '../MqttController'
 import { Link } from 'react-router-dom'
 
 
@@ -15,62 +15,68 @@ function CarControl() {
   let rightButton = 'D'
   let stopButton = 'STOP'
 
+
   const onKeyDown = (event) => {
-    if(event.repeat){return}
+    if (event.repeat) { return }
     // eslint-disable-next-line
-    switch(event.keyCode) {
+    switch (event.keyCode) {
       case 87://W
-      publisher.forward()
-      document.getElementById(forwardButton).style.backgroundColor = useColor
+        publisher.forward()
+        document.getElementById(forwardButton).style.backgroundColor = useColor
         break;
       case 83://S
-      publisher.backward()
-      document.getElementById(backwardButton).style.backgroundColor = useColor
+        publisher.backward()
+        document.getElementById(backwardButton).style.backgroundColor = useColor
         break;
       case 65://A
-      publisher.left()
-      document.getElementById(leftButton).style.backgroundColor = useColor
+        publisher.left()
+        document.getElementById(leftButton).style.backgroundColor = useColor
         break;
       case 68://D
-      publisher.right()
-      document.getElementById(rightButton).style.backgroundColor = useColor
+        publisher.right()
+        document.getElementById(rightButton).style.backgroundColor = useColor
         break;
       case 32://Space
-      publisher.breakSpeed()
-      document.getElementById(stopButton).style.backgroundColor = stopUseColor
+        publisher.breakSpeed()
+        document.getElementById(stopButton).style.backgroundColor = stopUseColor
         break;
     }
   }
   const onKeyUp = (event) => {
     // eslint-disable-next-line
-    switch(event.keyCode) {
+    switch (event.keyCode) {
       case 87://W
-      publisher.stopSpeed()
-      document.getElementById(forwardButton).style.backgroundColor = regularColor
+        publisher.stopSpeed()
+        document.getElementById(forwardButton).style.backgroundColor = regularColor
         break;
       case 83://S
-      publisher.stopSpeed()
-      document.getElementById(backwardButton).style.backgroundColor = regularColor
+        publisher.stopSpeed()
+        document.getElementById(backwardButton).style.backgroundColor = regularColor
         break;
       case 65://A
-      publisher.stopTurn()
-      document.getElementById(leftButton).style.backgroundColor = regularColor
+        publisher.stopTurn()
+        document.getElementById(leftButton).style.backgroundColor = regularColor
         break;
       case 68://D
-      publisher.stopTurn()
-      document.getElementById(rightButton).style.backgroundColor = regularColor
+        publisher.stopTurn()
+        document.getElementById(rightButton).style.backgroundColor = regularColor
         break;
       case 32://Space
-      publisher.breakSpeed()
-      document.getElementById(stopButton).style.backgroundColor = stopColor
+        publisher.breakSpeed()
+        document.getElementById(stopButton).style.backgroundColor = stopColor
         break;
     }
   }
 
+
+ 
+
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-      
+
       <header className="CarControl-header">
+
+        <canvas className="cameraStream" width="320" height="240" id="img"></canvas>
         <p>
           Group06 :)))
         </p>
@@ -90,5 +96,8 @@ function CarControl() {
     </div>
   )
 }
+
+
+
 
 export default CarControl;
