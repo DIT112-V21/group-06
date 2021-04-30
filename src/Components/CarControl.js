@@ -76,15 +76,14 @@ function CarControl() {
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>
-        <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn'/>
+        <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn' id = {forwardButton}/>
         <br/>
-        <Button text={leftButton} color = {regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn'/>
-        <Button text={backwardButton} color = {regularColor} onClick={publisher.backward} className='dirBtn'/>
-        <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn'/>
+        <Button text={leftButton} color = {regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn' id = {leftButton}/>
+        <Button text={backwardButton} color = {regularColor} onClick={publisher.backward} className='dirBtn' id = {backwardButton}/>
+        <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn' id = {rightButton}/>
         <br/>
         <Link to="/logIn">
-        <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn'/>
-        
+        <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn' id={stopButton}/>
         </Link>
         </p>
       </header>
