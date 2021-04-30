@@ -1,12 +1,14 @@
 import '../Css/CarControl.css';
 import Button from './Button'
 import * as publisher from '../MqttController'
+import { Link } from 'react-router-dom'
 
-export function CarControl() {
-  let useColor = '#0e4b25'
-  let regularColor = '#39933b'
-  let stopUseColor = '#770404'
-  let stopColor = 'red'
+
+function CarControl() {
+  let useColor = '#2c8388'
+  let regularColor = '#3fc1c9'
+  let stopUseColor = '#a13455'
+  let stopColor = '#fc5185'
   let forwardButton = 'W'
   let backwardButton = 'S'
   let leftButton = 'A'
@@ -76,17 +78,20 @@ export function CarControl() {
 
         <canvas className="cameraStream" width="320" height="240" id="img"></canvas>
         <p>
-          <Button text={forwardButton} color={regularColor} onClick={publisher.forward} className='dirBtn' />
-          <br />
-          <Button text={leftButton} color={regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn' />
-          <Button text={backwardButton} color={regularColor} onClick={publisher.backward} className='dirBtn' />
-          <Button text={rightButton} color={regularColor} onMouseDown={publisher.right} onMouseUp={publisher.stopTurn} className='dirBtn' />
-          <br />
-          <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn' /></p>
-        <p>
           Group06 :)))
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
+        <p>
+        <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn' id = {forwardButton}/>
+        <br/>
+        <Button text={leftButton} color = {regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn' id = {leftButton}/>
+        <Button text={backwardButton} color = {regularColor} onClick={publisher.backward} className='dirBtn' id = {backwardButton}/>
+        <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn' id = {rightButton}/>
+        <br/>
+        <Link to="/logIn">
+        <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn' id={stopButton}/>
+        </Link>
+        </p>
       </header>
     </div>
   )

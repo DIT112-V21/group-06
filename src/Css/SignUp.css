@@ -1,8 +1,8 @@
-.CarControl {
+.SingUp {
     text-align: center;
   }
   
-  .CarControl-header {
+  .SignUp-header {
     background-color: #364f6b;
     min-height: 100vh;
     display: flex;
@@ -14,10 +14,16 @@
   }
   
   .helpText {
-font-size: 12px;
+    font-size: 12px;
+
+  }
+  .inputPrompt {
+    font-size: 12px;
+    opacity: 0.7;
+
   }
   
-  .btn {
+  #canBtn {
     background-color: #fc5185; 
     border: none;
     border-radius: 4px;
@@ -26,26 +32,40 @@ font-size: 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-    width: 95%;
+    font-size: 20px;
+    margin: 10px 3px;
+    width: 40%;
   }
-  .dirBtn {
+  #canBtn:active {
+    background-color: #fc5185; 
+    opacity: 0.5;
+    
+  }
+  #regBtn {
     background-color: #3fc1c9; 
     border: none;
     border-radius: 4px;
     color: white;
-    padding: 25px 25px;
+    padding: 25px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 5px;
+    font-size: 20px;
+    margin: 10px 3px;
+    width: 55%;
   }
-  
-.cameraStream{
+  #regBtn:active {
+    background-color: #3fc1c9; 
+    opacity: 0.5;
+  }
 
-  background-color: white;
-  color: black;
+  .input {
+    background-color: #364f6b;
+    width: 88.5%;
+    padding: 12px 20px;
+    margin: 2px;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    
 }
-  
