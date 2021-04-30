@@ -1,6 +1,5 @@
 import '../Css/SignUp.css'; 
-import Button from './Button'
-import * as publisher from '../publisher'   
+import Button from './Button' 
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
 
@@ -28,10 +27,10 @@ let cancelButton = 'Cancel'
             <TextField text="" type="email" />
             </p>
             <Link to="/logIn">
-            <Button text={cancelButton}  onClick={publisher.forward} id='canBtn'/>
+            <Button text={cancelButton} id='canBtn'/>
             </Link>
             <Link to="/logIn">
-            <Button text={registerButton}  onClick={publisher.backward} id='regBtn'/>
+            <Button text={registerButton} id='regBtn'/>
             </Link>
         </p>
       </header>
