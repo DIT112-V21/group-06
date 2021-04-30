@@ -5,11 +5,7 @@ import TextField from './TextField'
 import { Link } from 'react-router-dom'
 
 
-function SignUp() {   
-let cancelUseColor = '#bd3a62'   
-let cancelColor = '#fc5185'   
-let registerUseColor = '#2c898f'   
-let regColor = '#3fc1c9'   
+function SignUp() {  
 let registerButton = 'Register'   
 let cancelButton = 'Cancel'     
 

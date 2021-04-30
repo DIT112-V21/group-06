@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import LogIn from './LogIn'
-import Home from './Home'
 import SignUp from './SignUp'
 import CarControl from './CarControl'
 

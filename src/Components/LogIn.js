@@ -5,11 +5,7 @@ import TextField from './TextField'
 import { Link } from 'react-router-dom'
 
 
-function LogIn() {   
-let cancelUseColor = '#bd3a62'   
-let cancelColor = '#fc5185'   
-let registerUseColor = '#2c898f'   
-let regColor = '#3fc1c9'   
+function LogIn() {    
 let registerButton = 'Log In'   
 let cancelButton = 'Sign Up'     
 
@@ -19,9 +15,9 @@ let cancelButton = 'Sign Up'
 
       <header className="LogIn-header">
         <p>
-          Worst Car Remote Controler App
+          Worst Car Remote Controller App
         </p>
-        <p className='helpText'>Please enter your Log in information to access this crapy application</p>
+        <p className='helpText'>Please enter your Log in information</p>
         <p>
         <p className='inputPrompt'>
             Username
