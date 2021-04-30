@@ -1,6 +1,5 @@
 import '../Css/LogIn.css'; 
 import Button from './Button'
-import * as publisher from '../publisher'   
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
 
@@ -26,10 +25,10 @@ let cancelButton = 'Sign Up'
             <TextField text="" type="password" />
             </p>
             <Link to="/signUp">
-            <Button text={cancelButton}  onClick={publisher.forward} id='signBtn'/>
+            <Button text={cancelButton} id='signBtn'/>
             </Link>
             <Link to="/carControl">
-            <Button text={registerButton}  onClick={publisher.backward} id='logBtn'/>
+            <Button text={registerButton} id='logBtn'/>
             </Link>
         </p>
       </header>
