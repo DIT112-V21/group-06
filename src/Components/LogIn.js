@@ -14,42 +14,8 @@ let registerButton = 'Log In'
 let cancelButton = 'Sign Up'     
 
 
-
-const onKeyDown = (event) => {     
-    if(event.repeat){return}     
-    // eslint-disable-next-line     
-    switch(event.keyCode) {       
-        case 87: //register       
-        publisher.backward()       
-        document.getElementById(registerButton).style.backgroundColor = registerUseColor         
-        break;       
-        case 83://cancel       
-        publisher.forward()       
-        document.getElementById(cancelButton).style.backgroundColor = cancelUseColor         
-        break;         }   }   
-        
-        
-        
-        
-        
-    const onKeyUp = (event) => {     
-    // eslint-disable-next-line     
-    switch(event.keyCode) {       
-        case 87://register       
-        publisher.stopSpeed()       
-        document.getElementById(registerButton).style.backgroundColor = regColor         
-        break;
-        case 83://cancel
-        publisher.stopSpeed()
-        document.getElementById(cancelButton).style.backgroundColor = cancelColor
-        break;
-
-    }
-  }
-
-
   return (
-    <div className="LogIn" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
+    <div className="LogIn" tabIndex="0" >
 
       <header className="LogIn-header">
         <p>

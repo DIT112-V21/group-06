@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 
 
 function CarControl() {
-  let useColor = '#0e4b25'
+  let useColor = '#2c8388'
   let regularColor = '#3fc1c9'
-  let stopUseColor = '#770404'
+  let stopUseColor = '#a13455'
   let stopColor = '#fc5185'
   let forwardButton = 'W'
   let backwardButton = 'S'
