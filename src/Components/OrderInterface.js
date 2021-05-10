@@ -30,11 +30,15 @@ const OrderInterface = () => {
 		e.preventDefault()
 		setQuery(search)
 		setSearch('')
-	} 
+	}
 
 	const updateBasket = (title) => {
+
+
 		var newOrders = []
 		var prevOrders = localStorage.getItem('orders')
+
+
 
 		if (prevOrders !== null) {
 			let a = JSON.parse(prevOrders)
@@ -42,23 +46,29 @@ const OrderInterface = () => {
 				newOrders.push(element)
 			});
 		}
-		newOrders.push(title)
 
+		newOrders.push(title)
 		localStorage.setItem('orders', JSON.stringify(newOrders))
 		setBasket(newOrders)
+
+		if (basket !== null) {
+			if (basket.length > 8) {
+				alert('You are a probably fat, so stop ordering more because I have developed a bad component that will go off screen if you continue and then you cant checkout')
+			}
+		}
 
 	}
 
 	const checkout = () => {
-		alert('Thanks for your order! \n We will send a car for your order and you will be nofified when it has arrived')
+		alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
 		localStorage.clear()
 		setBasket([])
 
 	}
 
-	const [basket, setBasket] = useState([])
+	
 
-	useEffect( () => {
+	useEffect(() => {
 		let getData = localStorage.getItem('orders')
 		let basketItems = JSON.parse(getData)
 
@@ -66,10 +76,28 @@ const OrderInterface = () => {
 	}, [])
 
 
-	var retriveData = localStorage.getItem('orders')
+
+
+	const deleteItem = (title) => {
+
+		for (let index = 0; index < basket.length; index++) {
+			if (basket[index] === title) {
+				basket.splice(index, 1)
+				break
+			}
+		}
+		
+		localStorage.setItem('orders', JSON.stringify(basket))
+		var retriveData = localStorage.getItem('orders')
 		var orders = JSON.parse(retriveData)
 
-	
+		setBasket(orders)
+
+	}
+	const [basket, setBasket] = useState([])
+	var retriveData = localStorage.getItem('orders')
+	var orders = JSON.parse(retriveData)
+
 	return (
 		<div className="OrderInterface">
 			<form onSubmit={getSearch} className="search-form">
@@ -80,29 +108,28 @@ const OrderInterface = () => {
 
 			{items.map(r => (
 				<div className="Food">
-				<h1>{r.recipe.label}</h1>
-				<img src={r.recipe.image} alt="" />
-				<br></br>
-				<button onClick={() => updateBasket(r.recipe.label)}>Add Item</button>
-			</div>
-				// <Food
-				// 	key={r.recipe.label}
-				// 	title={r.recipe.label}
-				// 	image={r.recipe.image}
-				// />
+					<h1>{r.recipe.label}</h1>
+					<img src={r.recipe.image} alt="" />
+					<br></br>
+					<button onClick={() => updateBasket(r.recipe.label)}>Add Item</button>
+				</div>
+
 
 			))}
-			
-			<div className="Basket"> {/*Todo: 1.Add button to remove item from Basket 
-											  2. Find more suiting api with price on food items	*/}
+
+			<div className="Basket"> 
+											  
 				<h1>Basket:</h1>
-				
+
 				{orders === null ? <p>Currenlty empty</p> : <p></p>}
 				{ }
 				{orders === null ? '' : basket.map(r => (
-					<h3>{r}</h3>
+					<div>
+						<h3>{r}</h3>
+						<button onClick={() => deleteItem(r)}>X</button>
+					</div>
 				))}
-
+				<br></br>
 				<button onClick={checkout}>Checkout</button>
 			</div>
 
