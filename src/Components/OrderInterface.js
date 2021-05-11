@@ -11,8 +11,9 @@ const OrderInterface = () => {
 	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('pizza')
 
-	useEffect(async () => {
+	useEffect(() => {
 		getItems()
+		// eslint-disable-next-line
 	}, [query])
 
 	const getItems = async () => {
@@ -60,13 +61,20 @@ const OrderInterface = () => {
 	}
 
 	const checkout = () => {
-		alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
-		localStorage.clear()
-		setBasket([])
-
+		if (basket !== null) {
+			if (basket.length < 1) {
+				alert('Your basket is empty')
+			} else {
+				alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
+				localStorage.clear()
+				setBasket([])
+			}
+		}else{
+			alert('Your basket is empty')
+		}
 	}
 
-	
+
 
 	useEffect(() => {
 		let getData = localStorage.getItem('orders')
@@ -86,7 +94,7 @@ const OrderInterface = () => {
 				break
 			}
 		}
-		
+
 		localStorage.setItem('orders', JSON.stringify(basket))
 		var retriveData = localStorage.getItem('orders')
 		var orders = JSON.parse(retriveData)
@@ -117,8 +125,8 @@ const OrderInterface = () => {
 
 			))}
 
-			<div className="Basket"> 
-											  
+			<div className="Basket">
+
 				<h1>Basket:</h1>
 
 				{orders === null ? <p>Currenlty empty</p> : <p></p>}
