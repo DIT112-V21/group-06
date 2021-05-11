@@ -40,7 +40,7 @@ void setup() {
 
 #ifdef __SMCE__
 
-  Camera.begin(QVGA, RGB888, 0); //qvga is a format 320 X 240, QVGA, RGB888, 0
+  Camera.begin(QVGA, RGB888, 10); //qvga is a format 320 X 240, QVGA, RGB888, 0
   frameBuffer.resize(Camera.width() * Camera.height() * Camera.bytesPerPixel());
   mqtt.begin("127.0.0.1", 1883, WiFi);
   // mqtt.begin(WiFi); // Will connect to localhost
