@@ -6,9 +6,6 @@ var client  = mqtt.connect('ws://127.0.0.1:9001')
 //assigned to localhost for now.
 client.subscribe('/smartcar/camera') 
 
-function imageStream(message) {
-
-  }
 
 client.on('message', function (topic, message) {
   // message is Buffer
