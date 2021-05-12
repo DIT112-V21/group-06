@@ -24,4 +24,26 @@ function createUserAccount(name, password, email, is_customer){
         });
       });
 }
+
+function checkIfEmailExists(email){
+  client.connect(function(err) {
+      if(err) {
+        return console.error('could not connect to postgres', err);
+      }
+   
+      var query =  "Select * from customer_account where email ="+"'"+email+"'"+";"
+      console.log(query)
+      client.query(query, function(err, result) {
+        if(result.rowCount != 1) {
+          console.error('error running query', err)
+          return false;
+        }else{
+          console.log ('user exists in database')
+           return true;
+        }
+        client.end();
+      });
+    });
+}
+
 module.exports = {createUserAccount};
