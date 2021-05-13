@@ -48,4 +48,9 @@ font-size: 12px;
   background-color: white;
   color: black;
 }
-  
+
+.joystick{
+  size: 100 ;
+  baseColor: "blue";
+  stickColor: "pink"; 
+}

@@ -2,6 +2,9 @@ import '../Css/CarControl.css';
 import Button from './Button'
 import * as publisher from '../MqttController'
 import { Link } from 'react-router-dom'
+//import Joystick from 'react-joystick-component'
+
+
 
 
 function CarControl() {
@@ -69,7 +72,7 @@ function CarControl() {
   }
 
 
- 
+
 
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>

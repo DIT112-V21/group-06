@@ -14,15 +14,20 @@ let cancelButton = 'Sign Up'
 
       <header className="LogIn-header">
         <p>
-          Worst Car Remote Controller App
+          Welcome to KRAN your online delivery service
         </p>
-        <p className='helpText'>Please enter your Log in information</p>
+        <p className='helpText'>
+          Please enter your Log in information
+          </p>
         <p>
         <p className='inputPrompt'>
             Username
             <TextField text="" />
             Password
             <TextField text="" type="password" />
+            </p>
+       <p className='helpText'>
+          If you don't have an account, sign up here!
             </p>
             <Link to="/signUp">
             <Button text={cancelButton} id='signBtn'/>

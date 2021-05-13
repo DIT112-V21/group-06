@@ -6,7 +6,7 @@ function loginAttempt(email, password){
 
     let passwordHash//retrieve password hash from db.
     if(comparePassword(password, passwordHash) == true)
-    //change to loginPage
+    //change to orderInterface
     }else{
     //display error message
     }
