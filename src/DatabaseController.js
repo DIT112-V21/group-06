@@ -24,4 +24,6 @@ function createUserAccount(name, password, email, is_customer){
         });
       });
 }
+createUserAccount("bajs", "kiss", "carlsson", true)
+
 module.exports = {createUserAccount};
