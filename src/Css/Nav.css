@@ -1,0 +1,19 @@
+.Nav {
+  display: flex;
+  min-height: 8vh;
+  background-color: rgb(81, 120, 175);
+  color: white;
+}
+
+.nav-links {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 70vw;
+  list-style: none;
+}
+
+.Nav a{
+    color: white;
+}

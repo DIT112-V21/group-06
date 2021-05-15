@@ -1,0 +1,91 @@
+.OrderInterface {
+  background-color: #364f6b;
+  height: 250vh;
+  color: white;
+}
+
+.Food {
+  float: left;
+  width: 20vw;
+  height: 60vh;
+  font-size: 70%;
+  margin-left: 8vw;
+}
+
+.search-form {
+  margin-left: 40vw;
+}
+
+.OrderInterface input {
+  background-color: rgb(63, 193, 201);
+  color: white;
+  height: 100%;
+  padding: 1%;
+  font-size: 150%;
+  border: none;
+}
+
+.OrderInterface button {
+  font-size: 150%;
+  padding: 1%;
+  background-color: rgb(252, 81, 133);
+  color: white;
+  border: none;
+}
+
+.Basket {
+  width: 15vw;
+  min-height: auto;
+  position: fixed;
+  margin-left: 5%;
+  top: 19vh;
+  right: 0;
+  background-color: rgb(252, 81, 133);
+  font-size: 70%;
+  text-align: center;
+  padding-bottom: 4vh;
+  border-radius: 5px;
+}
+
+.Basket button {
+  font-size: 150%;
+  padding: 1%;
+  background-color: rgb(63, 193, 201);
+  color: white;
+  border: none;
+}
+
+.CustomOrders {
+  background-color: #364f6b;
+  height: 100vh;
+  color: white;
+
+}
+
+.CustomOrders input {
+  background-color: rgb(63, 193, 201);
+  color: white;
+  height: 100%;
+  padding: 1%;
+  font-size: 150%;
+  border: none;
+  float: left;
+  margin-left: 40vw;
+  margin-bottom: 5%;
+}
+
+.CustomOrders button {
+    font-size: 150%;
+    padding: 1%;
+    background-color: rgb(252, 81, 133);
+    color: white;
+    border: none;
+    float: left;
+    margin-left: 40vw;
+}
+
+.CustomOrders label { 
+    float: left;
+    margin-left: 40vw;
+    margin-top: 2%;
+    }
