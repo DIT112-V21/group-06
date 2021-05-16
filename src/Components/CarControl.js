@@ -69,11 +69,14 @@ function CarControl() {
         break;
     }
   }
-function handleMove() {
-  Joystick.type
 
+function handleMove(event) {
+  publisher.movex(event.x)
+  publisher.movey(event.y)
  }
+ 
 function handleStop(){
+publisher.breakSpeed()
 
 }
  

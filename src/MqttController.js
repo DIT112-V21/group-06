@@ -1,4 +1,4 @@
-var speed
+
 
 var mqtt = require('mqtt')
 var client  = mqtt.connect('ws://127.0.0.1:9001') 
@@ -57,4 +57,10 @@ export function stopSpeed(speed){
 export function breakSpeed(){
   client.publish('/smartcar/control/throttle', '0')
   client.publish('/smartcar/control/steering', '0')
+}
+export function movey(speed){
+  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+}
+export function movex(speed){
+  client.publish('/smartcar/control/throttle',"'"+speed+"'")
 }
