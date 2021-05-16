@@ -62,5 +62,5 @@ export function movey(speed){
   client.publish('/smartcar/control/throttle',"'"+speed+"'")
 }
 export function movex(speed){
-  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+  client.publish('/smartcar/control/steering',"'"+speed+"'")
 }
