@@ -2,12 +2,12 @@ import '../Css/SignUp.css';
 import Button from './Button' 
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
-//import * as database from '../DatabaseController'
+/*import * as database from '../DatabaseController'
 
 
- //var username
- //var password
- //var email
+ var username
+ var password
+ var email*/
 
 
 function SignUp() {  
@@ -35,7 +35,7 @@ let cancelButton = 'Cancel'
             <Link to="/logIn">
             <Button text={cancelButton} id='canBtn'/>
             </Link>
-            <Link to="/logIn">
+            <Link to="/WelcomePage">
             <Button text={registerButton} id='regBtn'/>
             </Link>
         </p>
@@ -47,6 +47,6 @@ let cancelButton = 'Cancel'
 password = this.refs.password.getValue();
 email = this.refs.email.getValue();
 
-database.createUserAccount(username, password, email, true)*/ 
+database.createUserAccount(username, password, email, true)*/
 
 export default SignUp;
