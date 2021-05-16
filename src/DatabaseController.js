@@ -6,6 +6,7 @@ var conString = "postgres://tlifeerj:JxvQP_5LdXUAQd5reuIWuK2WbmlnB74B@hattie.db.
 var client = new pg.Client(conString);
 
 
+
 function createUserAccount(name, password, email, is_customer){
     client.connect(function(err) {
         if(err) {
@@ -25,48 +26,92 @@ function createUserAccount(name, password, email, is_customer){
       });
 }
 
-function checkIfEmailExists(email){ // checks if username is already taken when signing up
-  client.connect(function(err) {
-      if(err) {
-        return console.error('could not connect to postgres', err);
-      }
-   
-      var query =  "Select * from customer_account where email ="+"'"+email+"'"+";"
-      console.log(query)
-      client.query(query, function(err, result) {
-        if(result.rowCount != 1) {
-        //  console.error('error running query', err)
-          return false;
-        }else{
-        //  console.log ('user exists in database')
-           return true;
-        }
-        client.end();
-      });
-    });
-}
-
 function checkPassword(email, password){ // checks if email exists and if password matches given email
+  return new Promise((resolve, reject) =>
   client.connect(function(err) {
-      if(err) {
-        return console.error('could not connect to postgres', err);
-      }
-   
-      var query =  "Select * from customer_account where email ="+"'"+email+"'"+" and password ="+"'"+password+"'"+";"
-      console.log(query)
-      client.query(query, function(err, result) {
-        if(result.rowCount != 1) {
-         console.error('wrong username or password', err)
-          return false;
-        }else{
-         console.log ('log in succesfull')
-           return true;
-        }
-        client.end();
-      });
-    });
-}
+          if (err) {
+              console.error('could not connect to postgres');
+              return reject(err);
+          }
+        
+              var query =  "Select * from customer_account where email ="+"'"+email+"'"+" and password ="+"'"+password+"'"+";"
+              console.log(query)
+              client.query(query, function(err, result) {
+              
+                if (err) {
+                  return reject(err);
+              }
 
+               if(result.rowCount != 1) {
+              console.error('error running query', err)
+               resolve(false);
+                }else{
+              console.log ('user exists in database')
+              resolve(true);
+              }
+              client.end();
+          });
+      })
+  )}
 
+function checkIfOperator(email){ // checks if email exists and if password matches given email
+  return new Promise((resolve, reject) =>
+  client.connect(function(err) {
+          if (err) {
+              console.error('could not connect to postgres');
+              return reject(err);
+          }
+        
+              var query =  "Select * from customer_account where email ="+"'"+email+"'"+" and is_customer ="+"'"+false+"'"+";"
+              console.log(query)
+              client.query(query, function(err, result) {
+              
+                if (err) {
+                  return reject(err);
+              }
 
-module.exports = {createUserAccount};
+               if(result.rowCount != 1) {
+               console.error('error running query', err)
+               resolve(false);
+                }else{
+                console.log ('user exists in database')
+              resolve(true);
+              }
+              client.end();
+          });
+      })
+  )}
+
+function checkIfEmailExists(email){ // checks if username is already taken when signing up
+  return new Promise((resolve, reject) =>
+  client.connect(function(err) {
+          if (err) {
+              console.error('could not connect to postgres');
+              return reject(err);
+          }
+        
+              var query =  "Select * from customer_account where email ="+"'"+email+"'"+";"
+              console.log(query)
+              client.query(query, function(err, result) {
+              
+                if (err) {
+                  return reject(err);
+              }
+
+               if(result.rowCount != 1) {
+              console.error('error running query', err)
+               resolve(false);
+                }else{
+              console.log ('user exists in database')
+              resolve(true);
+              }
+              client.end();
+          });
+      })
+  )}
+  
+    /*checkPassword("operator@hotmail.com", "password")
+    .then(valid => console.log(valid))
+    .catch(err => console.error(err));*/
+
+module.exports = {createUserAccount, checkIfEmailExists, checkPassword, checkIfOperator};
