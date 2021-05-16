@@ -23,19 +23,19 @@ function CarControl() {
     // eslint-disable-next-line
     switch (event.keyCode) {
       case 87://W
-        publisher.forward()
+        publisher.forward(50)
         document.getElementById(forwardButton).style.backgroundColor = useColor
         break;
       case 83://S
-        publisher.backward()
+        publisher.backward(-50)
         document.getElementById(backwardButton).style.backgroundColor = useColor
         break;
       case 65://A
-        publisher.left()
+        publisher.left(30)
         document.getElementById(leftButton).style.backgroundColor = useColor
         break;
       case 68://D
-        publisher.right()
+        publisher.right(-30)
         document.getElementById(rightButton).style.backgroundColor = useColor
         break;
       case 32://Space
@@ -48,19 +48,19 @@ function CarControl() {
     // eslint-disable-next-line
     switch (event.keyCode) {
       case 87://W
-        publisher.stopSpeed()
+        publisher.stopSpeed(0)
         document.getElementById(forwardButton).style.backgroundColor = regularColor
         break;
       case 83://S
-        publisher.stopSpeed()
+        publisher.stopSpeed(0)
         document.getElementById(backwardButton).style.backgroundColor = regularColor
         break;
       case 65://A
-        publisher.stopTurn()
+        publisher.stopTurn(0)
         document.getElementById(leftButton).style.backgroundColor = regularColor
         break;
       case 68://D
-        publisher.stopTurn()
+        publisher.stopTurn(0)
         document.getElementById(rightButton).style.backgroundColor = regularColor
         break;
       case 32://Space
@@ -69,7 +69,8 @@ function CarControl() {
         break;
     }
   }
- function handleMove() {
+function handleMove() {
+  Joystick.type
 
  }
 function handleStop(){
@@ -88,7 +89,7 @@ function handleStop(){
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>
-        
+        <BrowserView>
           <Joystick size={200} baseColor="pink" stickColor="lightblue" move={handleMove} stop={handleStop}></Joystick>
        <br/>
         <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn' id = {forwardButton}/>
@@ -96,7 +97,7 @@ function handleStop(){
         <Button text={leftButton} color = {regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn' id = {leftButton}/>
         <Button text={backwardButton} color = {regularColor} onClick={publisher.backward} className='dirBtn' id = {backwardButton}/>
         <Button text={rightButton} color = {regularColor} onMouseDown={publisher.right}onMouseUp={publisher.stopTurn} className='dirBtn' id = {rightButton}/>
-      
+        </BrowserView>
         <br/>
         <Link to="/logIn">
         <Button text={stopButton} color={stopColor} onClick={publisher.breakSpeed} className='btn' id={stopButton}/>

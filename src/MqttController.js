@@ -1,4 +1,4 @@
-
+var speed
 
 var mqtt = require('mqtt')
 var client  = mqtt.connect('ws://127.0.0.1:9001') 
@@ -30,28 +30,28 @@ client.on('message', function (topic, message) {
   }}
 })
 
-export function forward(){
-  client.publish('/smartcar/control/throttle', '50')
+export function forward(speed){
+  client.publish('/smartcar/control/throttle',"'"+speed+"'")
 }
 
-export function backward(){
-  client.publish('/smartcar/control/throttle', '-50')
+export function backward(speed){
+  client.publish('/smartcar/control/throttle',"'"+speed+"'")
 }
 
-export function left(){
-  client.publish('/smartcar/control/steering', '-30')
+export function left(speed){
+  client.publish('/smartcar/control/steering',"'"+speed+"'")
 }
 
-export function right(){
-  client.publish('/smartcar/control/steering', '30')
+export function right(speed){
+  client.publish('/smartcar/control/steering',"'"+speed+"'")
 }
 
-export function stopTurn(){
-  client.publish('/smartcar/control/steering', '0')
+export function stopTurn(speed){
+  client.publish('/smartcar/control/steering',"'"+speed+"'")
 }
 
-export function stopSpeed(){
-  client.publish('/smartcar/control/throttle', '0')
+export function stopSpeed(speed){
+  client.publish('/smartcar/control/throttle',"'"+speed+"'")
 }
 
 export function breakSpeed(){
