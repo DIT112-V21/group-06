@@ -25,12 +25,12 @@ let cancelButton = 'Cancel'
         <p>
         <p className='inputPrompt'>
             Username
-            <TextField ref = "username"  text="" type = 'username' />
+            <TextField   text="" type = 'username' />
             Password
-            <TextField ref = "password"  text="" type="password" />
+            <TextField   text="" type="password" />
             <br/>
             Email adress
-            <TextField ref = "email" text="" type="email" />
+            <TextField  text="" type="email" />
             </p>
             <Link to="/logIn">
             <Button text={cancelButton} id='canBtn'/>
