@@ -14,6 +14,12 @@ function Nav() {
         <Link to='/OrderInterface'>
           <li id='shop-li'>Order food</li>
         </Link>
+
+
+        <Link to='/CustomOrders'>
+          <li>Custom orders</li>
+        </Link>
+
       </ul>
     </nav>
   );

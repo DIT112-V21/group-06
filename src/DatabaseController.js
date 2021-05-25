@@ -26,6 +26,7 @@ function createUserAccount(name, password, email, is_customer){
       });
 }
 
+
 function checkPassword(email, password){ // checks if email exists and if password matches given email
   return new Promise((resolve, reject) =>
   client.connect(function(err) {
@@ -115,3 +116,4 @@ function checkIfEmailExists(email){ // checks if username is already taken when 
     .catch(err => console.error(err));*/
 
 module.exports = {createUserAccount, checkIfEmailExists, checkPassword, checkIfOperator};
+

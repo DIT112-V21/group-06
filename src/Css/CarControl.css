@@ -49,8 +49,32 @@ font-size: 12px;
   color: black;
 }
 
+
 .joystick{
   size: 100 ;
   baseColor: "blue";
   stickColor: "pink"; 
 }
+
+  
+.order-list{
+  border-radius: 2px solid black;
+  min-width: 20vw;
+  height: 100vh;
+  float: left;
+  background-color: #45668d;
+  color: white;
+}
+
+.single-order{
+  background-color: #364f6b;
+  padding: 2%;
+}
+
+.single-order button {
+  background-color: green;
+  border: none;
+  padding: 1%;
+  color: white;
+}
+

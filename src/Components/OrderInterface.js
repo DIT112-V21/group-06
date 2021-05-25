@@ -11,8 +11,13 @@ const OrderInterface = () => {
 	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('pizza')
 
+
 	useEffect(async () => {
 		getItems()
+
+	useEffect(() => {
+		getItems()
+		// eslint-disable-next-line
 	}, [query])
 
 	const getItems = async () => {
@@ -40,8 +45,14 @@ const OrderInterface = () => {
 
 
 
+
 		if (prevOrders !== null) {
-			let a = JSON.parse(prevOrders)
+
+
+		let a = JSON.parse(prevOrders)
+		
+		if (a !== null) {
+
 			a.forEach(element => {
 				newOrders.push(element)
 			});
@@ -60,6 +71,7 @@ const OrderInterface = () => {
 	}
 
 	const checkout = () => {
+
 		alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
 		localStorage.clear()
 		setBasket([])
@@ -67,6 +79,44 @@ const OrderInterface = () => {
 	}
 
 	
+
+		if (basket !== null) {
+			if (basket.length < 1) {
+				alert('Your basket is empty')
+
+			} else {
+				// alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
+				let adress = prompt("Please enter your adress", "");
+
+				if (adress === null || adress === "") {
+					console.log("User cancelled the prompt.")
+				} else {
+
+					// localStorage.clear()
+					let id = localStorage.getItem('id')
+					localStorage.setItem('orders', null)
+					localStorage.setItem('order'+ id, orders+ ';'  +adress)
+					
+					let newId = Number(id) + 1
+					localStorage.setItem('id', newId)
+					
+
+					// let old = localStorage.getItem('adress');
+					// if (old === null) old = "";
+					// localStorage.setItem('adress', old + adress + ',');
+
+
+
+					setBasket([])
+				}
+			}
+		} else {
+			alert('Your basket is empty')
+		}
+	}
+
+
+
 
 	useEffect(() => {
 		let getData = localStorage.getItem('orders')
@@ -86,7 +136,9 @@ const OrderInterface = () => {
 				break
 			}
 		}
+
 		
+
 		localStorage.setItem('orders', JSON.stringify(basket))
 		var retriveData = localStorage.getItem('orders')
 		var orders = JSON.parse(retriveData)
@@ -97,6 +149,15 @@ const OrderInterface = () => {
 	const [basket, setBasket] = useState([])
 	var retriveData = localStorage.getItem('orders')
 	var orders = JSON.parse(retriveData)
+
+
+	let checkId = localStorage.getItem('id')
+	if(checkId === null){
+		localStorage.setItem('id',0)		
+	}else if(Number(checkId) > 20){
+		localStorage.setItem('id',1)
+	}
+
 
 	return (
 		<div className="OrderInterface">
@@ -117,8 +178,10 @@ const OrderInterface = () => {
 
 			))}
 
-			<div className="Basket"> 
-											  
+
+			<div className="Basket">
+
+
 				<h1>Basket:</h1>
 
 				{orders === null ? <p>Currenlty empty</p> : <p></p>}
