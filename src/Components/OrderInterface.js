@@ -11,10 +11,6 @@ const OrderInterface = () => {
 	const [search, setSearch] = useState('')
 	const [query, setQuery] = useState('pizza')
 
-
-	useEffect(async () => {
-		getItems()
-
 	useEffect(() => {
 		getItems()
 		// eslint-disable-next-line
@@ -42,17 +38,9 @@ const OrderInterface = () => {
 
 		var newOrders = []
 		var prevOrders = localStorage.getItem('orders')
-
-
-
-
-		if (prevOrders !== null) {
-
-
 		let a = JSON.parse(prevOrders)
 		
 		if (a !== null) {
-
 			a.forEach(element => {
 				newOrders.push(element)
 			});
@@ -71,15 +59,6 @@ const OrderInterface = () => {
 	}
 
 	const checkout = () => {
-
-		alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
-		localStorage.clear()
-		setBasket([])
-
-	}
-
-	
-
 		if (basket !== null) {
 			if (basket.length < 1) {
 				alert('Your basket is empty')
@@ -117,7 +96,6 @@ const OrderInterface = () => {
 
 
 
-
 	useEffect(() => {
 		let getData = localStorage.getItem('orders')
 		let basketItems = JSON.parse(getData)
@@ -137,8 +115,6 @@ const OrderInterface = () => {
 			}
 		}
 
-		
-
 		localStorage.setItem('orders', JSON.stringify(basket))
 		var retriveData = localStorage.getItem('orders')
 		var orders = JSON.parse(retriveData)
@@ -150,14 +126,12 @@ const OrderInterface = () => {
 	var retriveData = localStorage.getItem('orders')
 	var orders = JSON.parse(retriveData)
 
-
 	let checkId = localStorage.getItem('id')
 	if(checkId === null){
 		localStorage.setItem('id',0)		
 	}else if(Number(checkId) > 20){
 		localStorage.setItem('id',1)
 	}
-
 
 	return (
 		<div className="OrderInterface">
@@ -178,9 +152,7 @@ const OrderInterface = () => {
 
 			))}
 
-
 			<div className="Basket">
-
 
 				<h1>Basket:</h1>
 

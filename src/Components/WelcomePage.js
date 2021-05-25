@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+// import React, { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import Button from './Button' 
 import '../Css/Welcome.css'; 
-import Popup from 'reactjs-popup';
+// import Popup from 'reactjs-popup';
 
 
 
@@ -22,9 +22,9 @@ const WelcomePage = () => {
         };
     }
 
-    const recentOrders = () => {
+    // const recentOrders = () => {
 
-    }
+    // }
     
     return (
         
