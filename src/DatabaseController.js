@@ -6,13 +6,13 @@ var conString = "postgres://tlifeerj:JxvQP_5LdXUAQd5reuIWuK2WbmlnB74B@hattie.db.
 var client = new pg.Client(conString);
 
 
-function createUserAccount(name, password, date, email){
+function createUserAccount(name, password, email, is_customer){
     client.connect(function(err) {
         if(err) {
           return console.error('could not connect to postgres', err);
         }
      
-        var query =  "INSERT INTO customer_account (name, password, birth_date, email) VALUES ("+"'"+name+"'"+", "+"'"+password+"'"+", "+"'"+date+"'"+", "+"'"+email+"'"+");"
+        var query =  "INSERT INTO customer_account (name, password, email, is_customer) VALUES ("+"'"+name+"'"+", "+"'"+password+"'"+", "+"'"+email+"'"+", "+"'"+is_customer+"'"+");"
         console.log(query)
         client.query(query, function(err, result) {
           if(err) {
@@ -24,4 +24,5 @@ function createUserAccount(name, password, date, email){
         });
       });
 }
+
 module.exports = {createUserAccount};
