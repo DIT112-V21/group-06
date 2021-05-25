@@ -1,5 +1,3 @@
-
-
 var mqtt = require('mqtt')
 var client  = mqtt.connect('ws://127.0.0.1:9001') 
 //websockets mqtt broker required
@@ -31,36 +29,57 @@ client.on('message', function (topic, message) {
 })
 
 export function forward(speed){
-  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+  client.publish('/smartcar/control/throttle',speed.toString())
 }
 
 export function backward(speed){
-  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+  client.publish('/smartcar/control/throttle',speed.toString())
 }
 
 export function left(speed){
-  client.publish('/smartcar/control/steering',"'"+speed+"'")
+  client.publish('/smartcar/control/steering',speed.toString())
 }
 
 export function right(speed){
-  client.publish('/smartcar/control/steering',"'"+speed+"'")
+  client.publish('/smartcar/control/steering',speed.toString())
 }
 
 export function stopTurn(speed){
-  client.publish('/smartcar/control/steering',"'"+speed+"'")
+  client.publish('/smartcar/control/steering',speed.toString())
 }
 
 export function stopSpeed(speed){
-  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+  client.publish('/smartcar/control/throttle',speed.toString())
 }
 
 export function breakSpeed(){
   client.publish('/smartcar/control/throttle', '0')
   client.publish('/smartcar/control/steering', '0')
 }
-export function movey(speed){
-  client.publish('/smartcar/control/throttle',"'"+speed+"'")
+function roundSpeed(speed){
+  speed = (speed / 2) / 10
+  speed = Math.round(speed)
+  speed = (speed * 2) * 10
+  return speed
 }
+
+
+let lastY = 0
+let lastX = 0
+
+export function movey(speed){
+  speed = roundSpeed(speed)
+  if(speed !== lastY){
+  client.publish('/smartcar/control/throttle',speed.toString())
+  lastY = speed
+  }
+}
+
+
 export function movex(speed){
-  client.publish('/smartcar/control/steering',"'"+speed+"'")
+  speed = roundSpeed(speed)
+  if(speed !== lastX){
+  client.publish('/smartcar/control/steering',speed.toString())
+  lastX = speed
+  }
 }

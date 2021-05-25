@@ -3,7 +3,7 @@ import Button from './Button'
 import * as publisher from '../MqttController'
 import { Link } from 'react-router-dom'
 import { Joystick } from 'react-joystick-component';
-import {BrowserView, MobileView} from 'react-device-detect'
+import {BrowserView} from 'react-device-detect'
 
 
 function CarControl() {
@@ -75,11 +75,6 @@ function handleMove(event) {
   publisher.movey(event.y)
  }
  
-function handleStop(){
-publisher.breakSpeed()
-
-}
- 
 
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
@@ -92,9 +87,9 @@ publisher.breakSpeed()
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>
-        <BrowserView>
-          <Joystick size={200} baseColor="pink" stickColor="lightblue" move={handleMove} stop={handleStop}></Joystick>
+          <Joystick size={200} baseColor="pink" stickColor="lightblue" throttle={200} move={handleMove} stop={publisher.breakSpeed}></Joystick>
        <br/>
+       <BrowserView>
         <Button text={forwardButton} color = {regularColor} onClick={publisher.forward} className='dirBtn' id = {forwardButton}/>
         <br/>
         <Button text={leftButton} color = {regularColor} onMouseDown={publisher.left} onMouseUp={publisher.stopTurn} className='dirBtn' id = {leftButton}/>
