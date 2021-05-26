@@ -35,6 +35,20 @@ app.get('/customers', (req, res) =>{
             })
         }})
 });
+
+app.get('/customers/checkEmail', (req, res) =>{
+    const  {password, email} = req.query;
+    const CHECK_EMAIL_QUERY = `SELECT * from customer_account where email = '${email}' and password = '${password}'`
+    client.query(CHECK_EMAIL_QUERY, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+
 app.get('/customers/add', (req, res) =>{
     const  {name, password, email, is_customer} = req.query;
     const INSERT_CUSTOMER = `INSERT INTO customer_account (name, password, email, is_customer) VALUES ('${name}','${password}','${email}',${is_customer})`
