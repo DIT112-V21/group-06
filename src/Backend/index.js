@@ -12,6 +12,7 @@ const ALL_ORDERS_QUERY = 'select * from delivery_order'
 const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
 const NEW_USER = 'Select * from customer_account'
 const ADRESS_INFO = 'Select * from delivery_adress'
+const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where order_pending = true'
 
 client.connect(err =>{
     if(err) {
@@ -95,10 +96,11 @@ app.get('/customers/add', (req, res) =>{
 }
 ))
 })
+
 app.get('/orders/add', (req, res) =>{
-    const  {toAdress, fromAdress, orderedBy} = req.query;
+    const  {customer_email, address_from, address_to} = req.query;
     let isCompleted = false
-    const INSERT_CUSTOMER = `INSERT INTO delivery_order (toAdress, fromAdress, orderedBy, isCompleted) VALUES ('${toAdress}','${fromAdress}','${orderedBy}',${isCompleted})`
+    const INSERT_CUSTOMER = `INSERT INTO delivery_order(customer_email, address_from, address_to) VALUES ('${customer_email}','${address_from}','${address_to}')`
     client.query(INSERT_CUSTOMER, (results => {
     
     return res.send('successfuly added customer')
