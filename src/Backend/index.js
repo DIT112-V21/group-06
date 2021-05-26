@@ -8,7 +8,8 @@ var client = new Client(conString);
 const app = express(); //
 
 const SELECT_ALL_QUERY = 'Select * from customer_account where email = \'felix\''
-
+const ALL_ORDERS_QUERY = 'select * from delivery_order'
+const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
 
 client.connect(err =>{
     if(err) {
@@ -23,6 +24,27 @@ app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('go to /customers to see customers')
+});
+
+app.get('/orders/open', (req, res) =>{
+    client.query(ALL_OPEN_ORDERS_QUERY, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+app.get('/orders', (req, res) =>{
+    client.query(ALL_ORDERS_QUERY, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
 });
 
 app.get('/customers', (req, res) =>{
@@ -58,6 +80,17 @@ app.get('/customers/add', (req, res) =>{
 }
 ))
 })
+app.get('/orders/add', (req, res) =>{
+    const  {toAdress, fromAdress, orderedBy} = req.query;
+    let isCompleted = false
+    const INSERT_CUSTOMER = `INSERT INTO delivery_order (toAdress, fromAdress, orderedBy, isCompleted) VALUES ('${toAdress}','${fromAdress}','${orderedBy}',${isCompleted})`
+    client.query(INSERT_CUSTOMER, (results => {
+    
+    return res.send('successfuly added customer')
+}
+))
+})
+
 
 app.listen(4000, () =>{
     console.log('Server listening on port 4000')
