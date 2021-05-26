@@ -16,7 +16,7 @@ function checkDatabase(email, password){
   .then((response) => {
     var value = response.data.rows.length
 
-   if(value != 1) {
+   if(value !== 1) {
   resolve(false);
     }else{
   resolve(true);
