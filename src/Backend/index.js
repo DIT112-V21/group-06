@@ -7,9 +7,9 @@ var client = new Client(conString);
 
 const app = express(); //
 
-const SELECT_ALL_QUERY = 'Select * from customer_account where email = \'felix\''
+const SELECT_ALL_QUERY = 'Select * from customer_account'
 const ALL_ORDERS_QUERY = 'select * from delivery_order'
-const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
+//const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
 const NEW_USER = 'Select * from customer_account'
 const ADRESS_INFO = 'Select * from delivery_adress'
 const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where order_pending = true'
