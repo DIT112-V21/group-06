@@ -2,13 +2,42 @@ import '../Css/SignUp.css';
 import Button from './Button' 
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
-/*import * as database from '../DatabaseController'
 
 
- var username
- var password
- var email*/
+ function checkIfEmailExists(email){
+  return new Promise((resolve, reject) =>
+  fetch(`http://localhost:4000/customers/checkIfEmailExists?email=${email}`)
+  .then(response => response.json())
+  .then((response) => {
+    var value = response.data.rows.length
 
+   if(value !== 1) {
+  resolve(true);
+    }else{
+  resolve(false);
+
+  }
+ }).catch(err => {
+  reject(false);
+ })
+ )}
+ 
+ 
+  function linkToLogIn(email){
+    checkIfEmailExists(email).then(function(result) {
+      console.log(result) 
+      if (result){
+         window.location.href = "/LogIn";
+         } else {
+          alert ("The email you have entered already exists.");
+         };
+   })
+  }
+
+  function onClick(){
+   var email = document.getElementById("email").value
+   linkToLogIn(email)
+  }
 
 function SignUp() {  
 let registerButton = 'Register'   
@@ -24,29 +53,25 @@ let cancelButton = 'Cancel'
         <p className='helpText'>Please enter your personal information on this TRUSTWORTHY site, trust us we will only use it for personal stuff</p>
         <p>
         <p className='inputPrompt'>
-            Username
-            <TextField   text="" type = 'username' />
+            Name
+            <TextField  text="name" type = "name" id = "name" />
             Password
-            <TextField   text="" type="password" />
+            <TextField  text="password" type="password" id = "password" />
             <br/>
             Email adress
-            <TextField  text="" type="email" />
+            <TextField text="email" type ="email" id= "email"/>
             </p>
             <Link to="/logIn">
             <Button text={cancelButton} id='canBtn'/>
             </Link>
-            <Link to="/WelcomePage">
-            <Button text={registerButton} id='regBtn'/>
-            </Link>
+            
+            <Button text={registerButton} onClick= {onClick} id='regBtn'/>
+            
         </p>
       </header>
     </div>
   )
 }
-/*username = this.refs.username.getValue();
-password = this.refs.password.getValue();
-email = this.refs.email.getValue();
 
-database.createUserAccount(username, password, email, true)*/
 
 export default SignUp;

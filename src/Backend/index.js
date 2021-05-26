@@ -10,6 +10,8 @@ const app = express(); //
 const SELECT_ALL_QUERY = 'Select * from customer_account where email = \'felix\''
 const ALL_ORDERS_QUERY = 'select * from delivery_order'
 const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
+const NEW_USER = 'Select * from customer_account'
+const ADRESS_INFO = 'Select * from delivery_adress'
 
 client.connect(err =>{
     if(err) {
@@ -61,6 +63,19 @@ app.get('/customers', (req, res) =>{
 app.get('/customers/checkEmail', (req, res) =>{
     const  {password, email} = req.query;
     const CHECK_EMAIL_QUERY = `SELECT * from customer_account where email = '${email}' and password = '${password}'`
+    client.query(CHECK_EMAIL_QUERY, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+
+app.get('/customers/checkIfEmailExists', (req, res) =>{
+    const  {email} = req.query;
+    const CHECK_EMAIL_QUERY = `SELECT * from customer_account where email = '${email}'`
     client.query(CHECK_EMAIL_QUERY, (err, results) => {
         if(err){
             return res.send(err)

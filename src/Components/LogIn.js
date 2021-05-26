@@ -34,7 +34,7 @@ function checkDatabase(email, password){
       if (result){
          window.location.href = "/WelcomePage";
          } else {
-          // code that prompts the user to enter a correct email or password here
+          alert("The email you have entered does not exist or the email and password does not match.");
          };
    })
   }
@@ -50,15 +50,15 @@ function checkDatabase(email, password){
  
       <header className="LogIn-header">
         <p>
-          Worst Car Remote Controller App
+          KRAN your online delivery service!
         </p>
         <p className='helpText'>Please enter your Log in information</p>
          <p className='inputPrompt'>
-            Username
+            Email
             <TextField text="email" type ="email" id= "email"/>
             Password
             <TextField text="password" type ="password" id= "password" />
-            
+            <p className='helpText'>If you don't have an account, sign up here!</p>
             <Link to="/signUp">
             <Button text={cancelButton} id='signBtn'/>
             </Link>
