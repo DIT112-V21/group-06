@@ -18,7 +18,7 @@
 }
 
 .OrderInterface input {
-  background-color: rgb(63, 193, 201);
+  background-color: rgb(135, 206, 250);
   color: white;
   height: 100%;
   padding: 1%;
@@ -29,7 +29,7 @@
 .OrderInterface button {
   font-size: 150%;
   padding: 1%;
-  background-color: rgb(252, 81, 133);
+  background-color: rgb(255, 194, 204);
   color: white;
   border: none;
 }
@@ -41,7 +41,7 @@
   margin-left: 5%;
   top: 19vh;
   right: 0;
-  background-color: rgb(252, 81, 133);
+  background-color: rgb(255, 194, 204);
   font-size: 70%;
   text-align: center;
   padding-bottom: 4vh;
@@ -51,7 +51,7 @@
 .Basket button {
   font-size: 150%;
   padding: 1%;
-  background-color: rgb(63, 193, 201);
+  background-color: rgb(135, 206, 250);
   color: white;
   border: none;
 }
@@ -64,7 +64,7 @@
 }
 
 .CustomOrders input {
-  background-color: rgb(63, 193, 201);
+  background-color: rgb(135, 206, 250);
   color: white;
   height: 100%;
   padding: 1%;
@@ -78,7 +78,7 @@
 .CustomOrders button {
     font-size: 150%;
     padding: 1%;
-    background-color: rgb(252, 81, 133);
+    background-color: rgb(255, 194, 204);
     color: white;
     border: none;
     float: left;
