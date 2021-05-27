@@ -8,7 +8,7 @@ import '../Css/Welcome.css';
 
 const WelcomePage = () => {
 
-    let addAdressBtn = 'Add delivery adress'
+    let addAddressBtn = 'Add delivery adress'
     let placeOrderBtn = 'Place new order'
     var destinationReached = true; //call method here to know if car has reached destination
 
@@ -44,8 +44,8 @@ const WelcomePage = () => {
                 <Link to="/OrderInterface">
                 <Button text={placeOrderBtn} id='placeOrderBtn'/>
                 </Link> 
-                <Link to="/AdressForm">
-                <Button text={addAdressBtn} id='addAdressBtn'/>
+                <Link to="/AddressForm">
+                <Button text={addAddressBtn} id='addAddressBtn'/>
                 </Link> 
                 </p>
 

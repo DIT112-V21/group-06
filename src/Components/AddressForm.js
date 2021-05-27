@@ -3,18 +3,20 @@ import Button from './Button'
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
 
+var currentUser = localStorage.getItem('email')
+console.log(currentUser)
 
-function checkIfAddressExists(email){
+function checkIfAddressExists(currentUser){
     return new Promise((resolve, reject) =>
-    fetch(`http://localhost:4000/customers/checkIfAddressExists?email=${email}`)
+    fetch(`http://localhost:4000/customers/checkIfAddressExists?email=${currentUser}`)
     .then(response => response.json())
     .then((response) => {
       var value = response.data.rows.length
   
-     if(value !== 1) {
-    resolve(true);
-      }else{
+     if(value > 0) {
     resolve(false);
+      }else{
+    resolve(true);
   
     }
    }).catch(err => {
@@ -44,65 +46,46 @@ function checkIfAddressExists(email){
     var address = document.getElementById("address").value
     var postalcode = document.getElementById("postal code").value
     var city = document.getElementById("city").value
-    if(){
-      
-      }
+    var fullAddress = address + ", " + postalcode + ", " + city
+    if(checkIfAddressExists(currentUser)){
+      storeAddress(currentUser, fullAddress)
+    }else{
+      alert ("There is an address connected to this account");
     }
    }
 
-   function linkToLogIn(email){
-    checkIfAddressExists(email).then(function(result) {
-      console.log(result) 
-      if (result){
-         window.location.href = "/OrderInterface";
-         } else {
-          alert ("There is an address connected to this account");
-         };
-   })
-  }
-
-  function addAddress(customer_email, address){
-    storeAddress(customer_email, address).then(function(result) {
-      console.log(result) 
-      if (result){
-         window.location.href = "/OrderInterface";
-         } else {
-          alert ("You have alreay added an address");
-         };
-   })
-  }
+  
 
 
-
-function AdressForm() {  
+function AddressForm() {  
 let registerButton = 'Register'   
 let cancelButton = 'Cancel'     
 
 
 
   return (
-    <div className="DeliveryAdress" tabIndex="0">
+    <div className="DeliveryAddress" tabIndex="0">
 
-      <header className="Adress-header">
+      <header className="Address-header">
         <p>
-          Adress form.
+          Address form.
         </p>
         <p className='helpText'>Please add your delivery information, so we know where to deliver your food.</p>
         <p>
         <p className='inputPrompt'>
-            Adress
-            <TextField   text=" adress " type = "adress" />
+            Address
+            <TextField   text=" address " type = "address" id= "address"/>
             Postal Code
-            <TextField   text=" postal code " type="postalcode" />
+            <TextField   text=" postal code " type="postal code" id="postal code" />
             <br/>
             City
-            <TextField  text=" city " type="city" />
+            <TextField  text=" city " type="city" id="city" />
             </p>
             <Link to="/OrderInterface">
             <Button text={cancelButton} id='canBtn'/>
             </Link>
             <Link to="/OrderInterface">
-            <Button text={registerButton} id='regBtn'/>
+            <Button text={registerButton} onClick={checkAddress} id='regBtn'/>
             </Link>
         </p>
       </header>

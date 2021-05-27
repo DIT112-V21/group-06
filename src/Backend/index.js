@@ -96,7 +96,7 @@ app.get('/customers/add', (req, res) =>{
     const INSERT_CUSTOMER = `INSERT INTO customer_account (name, password, email, is_customer) VALUES ('${name}','${password}','${email}',${is_customer})`
     client.query(INSERT_CUSTOMER, (results => {
     
-    return res.send('successfuly added customer')
+    return res.send('successfully added customer')
 }
 ))
 })

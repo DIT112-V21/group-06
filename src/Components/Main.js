@@ -6,7 +6,7 @@ import CarControl from './CarControl'
 import OrderInterface from './OrderInterface'
 import WelcomePage from './WelcomePage'
 import CustomOrders from './CustomOrder'
-import AdressForm from './AddressForm'
+import AddressForm from './AddressForm'
 
 
 const Main = () => {
@@ -19,7 +19,7 @@ const Main = () => {
       <Route exact path='/OrderInterface' component={OrderInterface}></Route>
       
       <Route exact path='/WelcomePage' component={WelcomePage}></Route>
-      <Route exact path='/AdressForm' component={AdressForm}></Route>
+      <Route exact path='/AddressForm' component={AddressForm}></Route>
       <Route exact path='/CustomOrders' component={CustomOrders}></Route>
 
 

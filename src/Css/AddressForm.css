@@ -1,8 +1,8 @@
-.DeliveryAdress {
+.DeliveryAddress {
     text-align: center;
   }
   
-  .Adress-header {
+  .Address-header {
     background-color: #364f6b;
     min-height: 100vh;
     display: flex;
