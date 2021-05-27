@@ -14,14 +14,14 @@ function checkDatabase(email, password){
   fetch(`http://localhost:4000/customers/checkEmail?email=${email}&password=${password}`)
   .then(response => response.json())
   .then((response) => {
-    var value = response.data.rows.length
+    let value = response.data.rows
 
-   if(value !== 1) {
-  resolve(false);
+   if(value.length !== 1) {
+  resolve("false");
     }else{
-  resolve(true);
-
-  }
+      if (value[0].is_customer){resolve("customer")}
+      else{resolve("operator")}
+    }
  }).catch(err => {
   reject(false);
  })
@@ -31,11 +31,16 @@ function checkDatabase(email, password){
   function linkToCustomerPage(email, password){
     checkDatabase(email, password).then(function(result) {
       console.log(result) 
-      if (result){
-         window.location.href = "/WelcomePage";
-         } else {
-          alert("The email you have entered does not exist or the email and password does not match.");
-         };
+      if (result == "customer"){
+         window.location.href = "/WelcomePage"
+         } 
+      else if (result=="operator") {
+          window.location.href = "/carControl"
+          
+         }
+      else {
+        alert("The email you have entered does not exist or the email and password does not match.")
+      }
    })
   }
 
