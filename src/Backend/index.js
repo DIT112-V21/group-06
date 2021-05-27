@@ -11,7 +11,7 @@ const SELECT_ALL_QUERY = 'Select * from customer_account'
 const ALL_ORDERS_QUERY = 'select * from delivery_order'
 //const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where isCompleted = false'
 const NEW_USER = 'Select * from customer_account'
-const ADRESS_INFO = 'Select * from delivery_adress'
+const ADDRESS_INFO = 'Select * from delivery_adress'
 const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where order_pending = true'
 
 client.connect(err =>{
@@ -93,6 +93,16 @@ app.get('/customers/add', (req, res) =>{
     client.query(INSERT_CUSTOMER, (results => {
     
     return res.send('successfuly added customer')
+}
+))
+})
+
+app.get('/customers/storeAddress', (req, res) =>{
+    const  {customer_email, address} = req.query;
+    const INSERT_ADDRESS = `INSERT INTO delivery_address (customer_email, address) VALUES ('${customer_email}','${address}')`
+    client.query(INSERT_ADDRESS, (results => {
+    
+    return res.send('address is successfully stored')
 }
 ))
 })
