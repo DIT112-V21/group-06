@@ -13,6 +13,10 @@ const ALL_ORDERS_QUERY = 'select * from delivery_order'
 const NEW_USER = 'Select * from customer_account'
 const ADDRESS_INFO = 'Select * from delivery_adress'
 const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where order_pending = true'
+const ALL_NOTCLOSED_ORDERS_QUERY = 'select * from delivery_order where order_delivered = false'
+
+
+
 
 client.connect(err =>{
     if(err) {
@@ -30,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/orders/open', (req, res) =>{
-    client.query(ALL_OPEN_ORDERS_QUERY, (err, results) => {
+    client.query(ALL_NOTCLOSED_ORDERS_QUERY, (err, results) => {
         if(err){
             return res.send(err)
         }else{
@@ -112,11 +116,23 @@ app.get('/orders/add', (req, res) =>{
     let isCompleted = false
     const INSERT_CUSTOMER = `INSERT INTO delivery_order(customer_email, address_from, address_to) VALUES ('${customer_email}','${address_from}','${address_to}')`
     client.query(INSERT_CUSTOMER, (results => {
-    
+
     return res.send('successfuly added customer')
 }
 ))
 })
+
+app.get('/orders/delivered', (req, res) =>{
+    const  {orderid} = req.query;
+    const INSERT_CUSTOMER = `update delivery_order set order_delivered=true where orderid=${orderid}`
+    client.query(INSERT_CUSTOMER, (results => {
+
+    return res.send('successfuly added customer')
+}
+))
+})
+
+
 
 
 app.listen(4000, () =>{

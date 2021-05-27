@@ -4,7 +4,6 @@ import TextField from './TextField'
 import { Link } from 'react-router-dom'
  
  
- 
 function LogIn() {    
 let registerButton = 'Log In'   
 let cancelButton = 'Sign Up'     
@@ -31,10 +30,10 @@ function checkDatabase(email, password){
   function linkToCustomerPage(email, password){
     checkDatabase(email, password).then(function(result) {
       console.log(result) 
-      if (result == "customer"){
+      if (result === "customer"){
          window.location.href = "/WelcomePage"
          } 
-      else if (result=="operator") {
+      else if (result==="operator") {
           window.location.href = "/carControl"
           
          }
@@ -46,8 +45,11 @@ function checkDatabase(email, password){
 
   function onClick(){
    var email = document.getElementById("email").value
+   localStorage.setItem('email', email)
    var password = document.getElementById("password").value
    linkToCustomerPage(email, password)
+
+   
   }
  
   return (
