@@ -100,7 +100,29 @@ app.get('/customers/add', (req, res) =>{
 app.get('/orders/add', (req, res) =>{
     const  {customer_email, address_from, address_to} = req.query;
     let isCompleted = false
-    const INSERT_CUSTOMER = `INSERT INTO delivery_order(customer_email, address_from, address_to) VALUES ('${customer_email}','${address_from}','${address_to}')`
+    const INSERT_ORDER = `INSERT INTO delivery_order(customer_email, address_from, address_to) VALUES ('${customer_email}','${address_from}','${address_to}')`
+    client.query(INSERT_ORDER, (results => {
+    
+    return res.send('successfuly added customer')
+}
+))
+})
+
+app.get('/orders/get', (req, res) =>{
+    const  {customer_email, address_from, address_to} = req.query;
+    let isCompleted = false
+    const INSERT_CUSTOMER = ``
+    client.query(INSERT_CUSTOMER, (results => {
+    
+    return res.send('successfuly added customer')
+}
+))
+})
+
+app.get('/orders/remove', (req, res) =>{
+    const  {customer_email, address_from, address_to} = req.query;
+    let isCompleted = false
+    const INSERT_CUSTOMER = ``
     client.query(INSERT_CUSTOMER, (results => {
     
     return res.send('successfuly added customer')

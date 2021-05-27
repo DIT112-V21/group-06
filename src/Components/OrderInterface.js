@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"
 import '../Css/OrderInterface.css'
 
 
+// var customerEmail = require('./LogIn')
+// var email = customerEmail.email
+
 const OrderInterface = () => {
 
 	const APP_ID = '6fa68a69'
@@ -58,12 +61,24 @@ const OrderInterface = () => {
 
 	}
 
+	function userCreate(resturantAdress,adress){
+		var email = localStorage.getItem('email')
+		fetch(`http://localhost:4000/orders/add?customer_email=${email}&address_from=${resturantAdress}&address_to=${adress}`)
+		.then(console.log('we got here 2'))
+		.catch(err => {
+		
+	   })
+	   }
+	   
+
 	const checkout = () => {
 		if (basket !== null) {
 			if (basket.length < 1) {
 				alert('Your basket is empty')
 
 			} else {
+				
+					
 				// alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
 				let adress = prompt("Please enter your adress", "");
 
@@ -87,6 +102,18 @@ const OrderInterface = () => {
 
 
 					setBasket([])
+
+					
+
+					let resturantAdress = 'resturant' + Math.floor(Math.random() * 100)
+					console.log('we got here')
+					userCreate(resturantAdress,adress)
+					
+				// 	fetch(`http://localhost:4000/orders/add?customer_email=null&address_from=${resturantAdress}&address_to=${adress}`)
+				// 	.catch(err => {
+					
+				//    })
+				   
 				}
 			}
 		} else {

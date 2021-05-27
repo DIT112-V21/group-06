@@ -3,7 +3,8 @@ import Button from './Button'
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
  
- 
+// var email;
+// exports.email = email
  
 function LogIn() {    
 let registerButton = 'Log In'   
@@ -46,8 +47,11 @@ function checkDatabase(email, password){
 
   function onClick(){
    var email = document.getElementById("email").value
+   localStorage.setItem('email', email)
    var password = document.getElementById("password").value
    linkToCustomerPage(email, password)
+
+   
   }
  
   return (
