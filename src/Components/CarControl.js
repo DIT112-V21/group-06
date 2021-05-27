@@ -81,6 +81,7 @@ function CarControl() {
 
 
   useEffect(() => {
+    getOrdersByEmail('')
     let tmp = []
 
     for (let i = 0; i <= 20; i++) {
@@ -97,28 +98,32 @@ function CarControl() {
   }, [])
 
 
-  const doneBtn = (item) => {
-
-    localStorage.removeItem(item)
+  const doneBtn = (id) => {
 
 
-    let tmp = []
+    fetch(`http://localhost:4000/orders/delivered?orderid=${id}`)
+    .then()
+		.catch(err => {
+		
+	   })
 
-    for (let i = 0; i <= 20; i++) { //max number of orders is 20 
-      if (localStorage.getItem('order' + i) !== null) { 
-        let word = localStorage.getItem('order' + i)
-        let array = word.split(';')
-        array.push('order' + i)
-        tmp.push(array)
+     getOrdersByEmail('')
 
-      }
-    }
-    setItems(tmp)
+  
+
   }
 
   const [items, setItems] = useState([])
 
+  async function getOrdersByEmail(email){
+   let response = await fetch('http://localhost:4000/orders/open') 
+   let json = await response.json()
+   let array = await json.data.rows
+   let array2 = Array.from(array)
+   setItems(array2)
+   }
 
+  
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
 
@@ -128,12 +133,12 @@ function CarControl() {
         {items.map(item => (
           <div className="single-order">
 
-            <p>Pickup: {item[0]}</p>
-            <p>End point: {item[1]}</p>
-            <button onClick={() => doneBtn(item[2])}>Done</button>
+            <p>Pickup: {item.address_from}</p>
+            <p>End point: {item.address_to}</p>
+            <button onClick={ () => doneBtn(item.orderid)}>Done</button>
           </div>
         ))}
-
+ 
 
 
       </div>
