@@ -7,6 +7,7 @@ import RecentOrders from './RecentOrders'
 
 const WelcomePage = () => {
 
+    let addAddressBtn = 'Add delivery adress'
     let placeOrderBtn = 'Place new order'
    
     useEffect(() => {
@@ -55,11 +56,15 @@ const WelcomePage = () => {
                 
                 <RecentOrders></RecentOrders>
 
+                
+                <p>
                 <Link to="/OrderInterface">
                 <Button text={placeOrderBtn} id='placeOrderBtn'/>
                 </Link> 
-                
-                
+                <Link to="/AddressForm">
+                <Button text={addAddressBtn} id='addAddressBtn'/>
+                </Link> 
+                </p>
 
             </header>
 
