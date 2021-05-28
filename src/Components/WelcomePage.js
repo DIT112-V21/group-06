@@ -1,32 +1,47 @@
-// import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import Button from './Button' 
 import '../Css/Welcome.css'; 
-// import Popup from 'reactjs-popup';
-
-
+import RecentOrders from './RecentOrders'
+  
 
 const WelcomePage = () => {
 
     let addAddressBtn = 'Add delivery address'
     let placeOrderBtn = 'Place new order'
-    var destinationReached = true; //call method here to know if car has reached destination
+   
+    useEffect(() => {
+        getUnopenedOrders()
+    }, )
+    const [items, setItems] = useState([])
+    
+    async function getUnopenedOrders(){
+        var email = localStorage.getItem('email')
+        let response = await fetch(`http://localhost:4000/ordersReached?email=${email}`) 
+        let json = await response.json()
+        let array = await json.data.rows
+        let array2 = Array.from(array)
+        setItems(array2)
+       }
 
-    function deliveryConfirmation() {
-        if(destinationReached){
-            /*var cargoDelivered =*/ window.confirm("Click 'OK' to confirm that the cargo has reached its destination and to open the lock");
+     function deliveryConfirmation() {
 
+        for (let i=0; i<items.length; i++){
+            var orderid = items[i].orderid
+            var cargoDelivered = window.confirm("Click 'OK' to confirm that the order with the order ID " + orderid + " has reached its destination and to open the lock");
 
-            destinationReached=false;
+            if (cargoDelivered){
+                
+                fetch(`http://localhost:4000/orders/opened?orderid=${orderid}`)
+                getUnopenedOrders()
+            } 
             
-            //send cargoDelivered to operator
-        };
+        }
+
+    
     }
 
-    // const recentOrders = () => {
-
-    // }
-    
+   
     return (
         
 		<div className="WelcomePage">
@@ -39,6 +54,8 @@ const WelcomePage = () => {
             <header className='Welcome-header'>
                 <p>Welcome!</p>
                 
+                <RecentOrders></RecentOrders>
+
                 
                 <p>
                 <Link to="/OrderInterface">
