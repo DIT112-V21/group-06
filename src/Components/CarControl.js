@@ -147,7 +147,7 @@ function CarControl() {
 
         <canvas className="cameraStream" width="320" height="240" id="img"></canvas>
         <p>
-          Group06 :)))
+          KRAN remote control
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>

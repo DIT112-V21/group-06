@@ -53,7 +53,7 @@ const WelcomePage = () => {
 
 
             <header className='Welcome-header'>
-                <p>Welcome!</p>
+                <p>Welcome to KRAN, you order, we deliver!</p>
                 
                 <RecentOrders></RecentOrders>
 
