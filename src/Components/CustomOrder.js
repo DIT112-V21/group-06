@@ -1,3 +1,5 @@
+import Nav from './Nav'
+
 const CustomOrders = () => {
 
     const submitBtn = () => {
@@ -9,12 +11,23 @@ const CustomOrders = () => {
         }else if(endPoint === ""){
             return false
         }else{
+            customOrder(pickUp, endPoint)
             alert("Thank you, a car will be sent ASAP to deliver your items");
         }
     }
 
+    function customOrder(resturantAdress,adress){
+		var email = localStorage.getItem('email')
+		fetch(`http://localhost:4000/orders/add?customer_email=${email}&address_from=${resturantAdress}&address_to=${adress}`)
+		.then()
+		.catch(err => {
+		
+	   })
+	   }
+
     return(
         <div className="CustomOrders">
+            <Nav />
             <form >
                 <label>Enter pickup adress:</label>
                 <input  required id="pickUp" type="text"></input>

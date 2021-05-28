@@ -8,14 +8,21 @@ function Nav() {
     <nav className="Nav">
       
       <ul className="nav-links">
-        <Link to='/carControl'>
-          <li>Car Controll</li>
+        <Link to='/WelcomePage'>
+          <li>Welcome Page</li>
         </Link>
+        
         <Link to='/OrderInterface'>
           <li id='shop-li'>Order food</li>
         </Link>
+
+
         <Link to='/CustomOrders'>
           <li>Custom orders</li>
+        </Link>
+
+        <Link to='/'>
+          <li>Log out</li>
         </Link>
       </ul>
     </nav>

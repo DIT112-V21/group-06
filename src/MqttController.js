@@ -8,25 +8,36 @@ client.subscribe('/smartcar/camera')
 client.on('message', function (topic, message) {
   // message is Buffer
   if (topic === '/smartcar/camera'){
+    let messageLenght = 320 * 240
+    onImage(message,messageLenght)
+}})
+
+async function onImage(message, messageLenght){
     let element = document.getElementById("img")
     if(element !== null){
     let ctx = element.getContext("2d")
     let imageData = ctx.createImageData(320, 240)
-    let messageLenght = 320 * 240
-    let ci = 0
-    for (ci = 0; ci < messageLenght; ++ci) {
-      let a = 255;
-      let r = message[3 * ci];
-      let g = message[3 * ci + 1];
-      let b = message[3 * ci + 2];
-      imageData.data[4 * ci] = r
-      imageData.data[4 * ci + 1] = g
-      imageData.data[4 * ci + 2] = b
-      imageData.data[4 * ci + 3] = a
-    }
-    ctx.putImageData(imageData, 0, 0)
+    let videoImage = await imageHandling(message, imageData, messageLenght)
+    ctx.putImageData(videoImage, 0, 0)
   }}
-})
+
+
+
+
+function imageHandling(message, imageData, messageLenght){
+  
+  for (let i = 0; i < messageLenght; ++i) {
+    let a = 255;
+    let r = message[3 * i];
+    let g = message[3 * i + 1];
+    let b = message[3 * i + 2];
+    imageData.data[4 * i] = r
+    imageData.data[4 * i + 1] = g
+    imageData.data[4 * i + 2] = b
+    imageData.data[4 * i + 3] = a
+  }
+  return imageData
+}
 
 export function forward(speed){
   client.publish('/smartcar/control/throttle',speed.toString())

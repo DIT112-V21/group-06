@@ -2,9 +2,11 @@ import '../Css/CarControl.css';
 import Button from './Button'
 import * as publisher from '../MqttController'
 import { Link } from 'react-router-dom'
+
 import { Joystick } from 'react-joystick-component';
 import { BrowserView } from 'react-device-detect'
 import React, { useEffect, useState } from "react"
+import Nav from './Nav'
 
 
 
@@ -79,6 +81,7 @@ function CarControl() {
 
 
   useEffect(() => {
+    getOrdersByEmail('')
     let tmp = []
 
     for (let i = 0; i <= 20; i++) {
@@ -95,41 +98,47 @@ function CarControl() {
   }, [])
 
 
-  const doneBtn = (item) => {
+  const doneBtn = (id) => {
 
-    localStorage.removeItem(item)
 
-    let tmp = []
+    fetch(`http://localhost:4000/orders/delivered?orderid=${id}`)
+    .then()
+		.catch(err => {
+		
+	   })
 
-    for (let i = 0; i <= 20; i++) { //max number of orders is 20 
-      if (localStorage.getItem('order' + i) !== null) { 
-        let word = localStorage.getItem('order' + i)
-        let array = word.split(';')
-        array.push('order' + i)
-        tmp.push(array)
+     getOrdersByEmail('')
 
-      }
-    }
-    setItems(tmp)
+  
+
   }
 
   const [items, setItems] = useState([])
 
+  async function getOrdersByEmail(email){
+   let response = await fetch('http://localhost:4000/orders/open') 
+   let json = await response.json()
+   let array = await json.data.rows
+   let array2 = Array.from(array)
+   setItems(array2)
+   }
+
+  
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-
+    <Nav />
       <div className="order-list">
         <h1>Orders:</h1>
 
         {items.map(item => (
           <div className="single-order">
 
-            <p>Pickup: {item[0]}</p>
-            <p>End point: {item[1]}</p>
-            <button onClick={() => doneBtn(item[2])}>Done</button>
+            <p>Pickup: {item.address_from}</p>
+            <p>End point: {item.address_to}</p>
+            <button onClick={ () => doneBtn(item.orderid)}>Done</button>
           </div>
         ))}
-
+ 
 
 
       </div>
@@ -138,11 +147,11 @@ function CarControl() {
 
         <canvas className="cameraStream" width="320" height="240" id="img"></canvas>
         <p>
-          Group06 :)))
+          KRAN remote control
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>
-          <Joystick size={200} baseColor="pink" stickColor="lightblue" throttle={200} move={handleMove} stop={publisher.breakSpeed}></Joystick>
+          <Joystick size={140} baseColor="pink" stickColor="lightblue" throttle={200} move={handleMove} stop={publisher.breakSpeed}></Joystick>
           <br />
           <BrowserView>
             <Button text={forwardButton} color={regularColor} onClick={publisher.forward} className='dirBtn' id={forwardButton} />

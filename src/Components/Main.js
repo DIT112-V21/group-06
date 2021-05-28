@@ -4,7 +4,10 @@ import LogIn from './LogIn'
 import SignUp from './SignUp'
 import CarControl from './CarControl'
 import OrderInterface from './OrderInterface'
+import WelcomePage from './WelcomePage'
 import CustomOrders from './CustomOrder'
+import AddressForm from './AddressForm'
+
 
 const Main = () => {
   return (
@@ -14,7 +17,11 @@ const Main = () => {
       <Route exact path='/signUp' component={SignUp}></Route>
       <Route exact path='/logIn' component={LogIn}></Route>
       <Route exact path='/OrderInterface' component={OrderInterface}></Route>
+      
+      <Route exact path='/WelcomePage' component={WelcomePage}></Route>
+      <Route exact path='/AddressForm' component={AddressForm}></Route>
       <Route exact path='/CustomOrders' component={CustomOrders}></Route>
+
 
     </Switch>
 
