@@ -4,7 +4,7 @@ import pkg from 'pg';
 const { Client } = pkg;
 var conString = "postgres://tlifeerj:JxvQP_5LdXUAQd5reuIWuK2WbmlnB74B@hattie.db.elephantsql.com:5432/tlifeerj" //Can be found in the Details page
 var client = new Client(conString);
-
+ 
 const app = express(); //
 
 const SELECT_ALL_QUERY = 'Select * from customer_account'
@@ -16,7 +16,7 @@ const ALL_OPEN_ORDERS_QUERY = 'select * from delivery_order where order_pending 
 const ALL_NOTCLOSED_ORDERS_QUERY = 'select * from delivery_order where order_delivered = false'
 
 
-
+   
 
 client.connect(err =>{
     if(err) {
@@ -25,9 +25,35 @@ client.connect(err =>{
 });
 
 
-
-
 app.use(cors());
+
+app.get('/ordersReached', (req, res) =>{
+    const  {email} = req.query;
+    const ORDERS_REACHED = `select * from delivery_order where customer_email = '${email}' AND order_delivered = true AND order_opened = false`
+        client.query(ORDERS_REACHED, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+
+
+app.get('/recentOrders', (req, res) =>{
+    const  {email} = req.query;
+    const RECENT_ORDERS_QUERY = `select * from delivery_order where customer_email = '${email}'`
+        client.query(RECENT_ORDERS_QUERY, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+
 
 app.get('/', (req, res) => {
   res.send('go to /customers to see customers')
@@ -120,6 +146,20 @@ app.get('/orders/delivered', (req, res) =>{
     return res.send('successfuly added customer')
 }
 ))
+
+})
+
+app.get('/orders/opened', (req, res) =>{
+    const  {orderid} = req.query;
+    const SET_ORDER_OPENED = `update delivery_order set order_opened=true where orderid=${orderid}`
+    client.query(SET_ORDER_OPENED, (results => {
+
+    return res.send('successfuly added customer')
+}
+
+    ))
+
+
 })
 
 
