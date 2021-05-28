@@ -73,16 +73,16 @@ let cancelButton = 'Cancel'
         <p>
           Address form.
         </p>
-        <p className='helpText'>Please add your delivery information, so we know where to deliver your food.</p>
+        <p className='helpText'>Please add your delivery information, so we know where to deliver your goods.</p>
         <p>
         <p className='inputPrompt'>
             Address
-            <TextField   text=" address " type = "address" id= "address"/>
+            <TextField   text="address" type = "address" id= "address"/>
             Postal Code
-            <TextField   text=" postal code " type="postal code" id="postal code" />
+            <TextField   text="postal code" type="postal code" id="postal code" />
             <br/>
             City
-            <TextField  text=" city " type="city" id="city" />
+            <TextField  text="city" type="city" id="city" />
             </p>
             <Link to="/OrderInterface">
             <Button text={cancelButton} id='canBtn'/>

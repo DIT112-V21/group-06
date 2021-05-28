@@ -11,6 +11,7 @@ function Nav() {
         <Link to='/WelcomePage'>
           <li>Welcome Page</li>
         </Link>
+        
         <Link to='/OrderInterface'>
           <li id='shop-li'>Order food</li>
         </Link>
