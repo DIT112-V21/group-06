@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import '../Css/OrderInterface.css'
-
-
+import './AddressForm'
 
 const OrderInterface = () => {
 
@@ -67,40 +66,45 @@ const OrderInterface = () => {
 		
 	   })
 	   }
-	   
-
-	const checkout = () => {
+	   	const checkout = async () => {
 		if (basket !== null) {
 			if (basket.length < 1) {
 				alert('Your basket is empty')
 
 			} else {
-				
-					
-				let adress = prompt("Please enter your adress", "");
+				// alert('Thanks for your order! \n We will send a car for your order and you will be notified when it has arrived')
+				let email = localStorage.getItem("email")
+				let customerAddress = ""
+				let response = await fetch(`http://localhost:4000/customers/getAddress?customer_email=${email}`)
+				let json = await response.json()
+        		let array = await json.data.rows
+				if( array.length > 0 ){
+					customerAddress = array[0].address
+			}
+				let address = prompt("Please enter your adress", customerAddress )
 
-				if (adress === null || adress === "") {
-					
+				if (address === null || address === "") {
+					console.log("User cancelled the prompt.")
 				} else {
 
+					// localStorage.clear()
 					let id = localStorage.getItem('id')
 					localStorage.setItem('orders', null)
-					localStorage.setItem('order'+ id, orders+ ';'  +adress)
+					localStorage.setItem('order'+ id, orders+ ';'  +address)
 					
 					let newId = Number(id) + 1
 					localStorage.setItem('id', newId)
-				
+					
+
+					// let old = localStorage.getItem('address');
+					// if (old === null) old = "";
+					// localStorage.setItem('address', old + address + ',');
 
 
 					setBasket([])
 
-					
-
-					let resturantAdress = 'resturant' + Math.floor(Math.random() * 100)
-					userCreate(resturantAdress,adress)
-					
-			
-				   
+					let resturantAddress = 'resturant' + Math.floor(Math.random() * 100)
+					userCreate(resturantAddress,address)
 				}
 			}
 		} else {
@@ -146,6 +150,9 @@ const OrderInterface = () => {
 	}else if(Number(checkId) > 20){
 		localStorage.setItem('id',1)
 	}
+
+	
+
 
 	return (
 		<div className="OrderInterface">

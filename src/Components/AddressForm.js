@@ -42,6 +42,8 @@ function checkIfAddressExists(currentUser){
    })
    )}
    
+
+   
    function checkAddress(){
     var address = document.getElementById("address").value
     var postalcode = document.getElementById("postal code").value

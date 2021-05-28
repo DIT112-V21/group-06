@@ -111,6 +111,19 @@ app.get('/customers/storeAddress', (req, res) =>{
 ))
 })
 
+app.get('/customers/getAddress', (req, res) =>{
+    const  {customer_email} = req.query;
+    const GET_ADDRESS = `SELECT * FROM delivery_address WHERE customer_email = '${customer_email}'`
+    client.query(GET_ADDRESS, (err, results) => {
+        if(err){
+            return res.send(err)
+        }else{
+            return res.json({
+                data: results
+            })
+        }})
+});
+
 app.get('/orders/add', (req, res) =>{
     const  {customer_email, address_from, address_to} = req.query;
     let isCompleted = false

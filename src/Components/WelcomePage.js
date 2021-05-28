@@ -8,7 +8,7 @@ import '../Css/Welcome.css';
 
 const WelcomePage = () => {
 
-    let addAddressBtn = 'Add delivery adress'
+    let addAddressBtn = 'Add delivery address'
     let placeOrderBtn = 'Place new order'
     var destinationReached = true; //call method here to know if car has reached destination
 
