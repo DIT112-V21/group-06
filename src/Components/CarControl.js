@@ -151,7 +151,7 @@ function CarControl() {
         </p>
         <p className='helpText'>You can control the car with the onscreen buttons or WASD for control and space for stopping.</p>
         <p>
-          <Joystick size={200} baseColor="pink" stickColor="lightblue" throttle={200} move={handleMove} stop={publisher.breakSpeed}></Joystick>
+          <Joystick size={140} baseColor="pink" stickColor="lightblue" throttle={200} move={handleMove} stop={publisher.breakSpeed}></Joystick>
           <br />
           <BrowserView>
             <Button text={forwardButton} color={regularColor} onClick={publisher.forward} className='dirBtn' id={forwardButton} />
