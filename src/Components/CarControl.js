@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { Joystick } from 'react-joystick-component';
 import { BrowserView } from 'react-device-detect'
 import React, { useEffect, useState } from "react"
-
+import Nav from './Nav'
 
 
 
@@ -126,7 +126,7 @@ function CarControl() {
   
   return (
     <div className="CarControl" tabIndex="0" onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-
+    <Nav />
       <div className="order-list">
         <h1>Orders:</h1>
 

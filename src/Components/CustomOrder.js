@@ -1,3 +1,5 @@
+import Nav from './Nav'
+
 const CustomOrders = () => {
 
     const submitBtn = () => {
@@ -25,6 +27,7 @@ const CustomOrders = () => {
 
     return(
         <div className="CustomOrders">
+            <Nav />
             <form >
                 <label>Enter pickup adress:</label>
                 <input  required id="pickUp" type="text"></input>

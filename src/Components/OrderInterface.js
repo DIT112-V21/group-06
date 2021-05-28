@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import '../Css/OrderInterface.css'
 import './AddressForm'
+import Nav from './Nav'
 
 const OrderInterface = () => {
 
@@ -156,6 +157,7 @@ const OrderInterface = () => {
 
 	return (
 		<div className="OrderInterface">
+			<Nav />
 			<form onSubmit={getSearch} className="search-form">
 				<input className="search-bar" type="text" value={search} onChange={updateSearch} />
 				<button className="search-button" type="submit">Search</button>

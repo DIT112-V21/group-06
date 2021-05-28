@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from './Button' 
 import '../Css/Welcome.css'; 
 import RecentOrders from './RecentOrders'
+import Nav from './Nav'
   
 
 const WelcomePage = () => {
@@ -46,7 +47,7 @@ const WelcomePage = () => {
         
 		<div className="WelcomePage">
 
-
+        <Nav />
             
            
 

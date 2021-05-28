@@ -2,6 +2,7 @@ import '../Css/AddressForm.css';
 import Button from './Button' 
 import TextField from './TextField'
 import { Link } from 'react-router-dom'
+import Nav from './Nav'
 
 var currentUser = localStorage.getItem('email')
 console.log(currentUser)
@@ -43,7 +44,7 @@ function checkIfAddressExists(currentUser){
    )}
    
 
-   
+
    function checkAddress(){
     var address = document.getElementById("address").value
     var postalcode = document.getElementById("postal code").value
@@ -67,7 +68,7 @@ let cancelButton = 'Cancel'
 
   return (
     <div className="DeliveryAddress" tabIndex="0">
-
+     <Nav />
       <header className="Address-header">
         <p>
           Address form.
