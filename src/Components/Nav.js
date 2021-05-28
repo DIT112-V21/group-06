@@ -21,6 +21,9 @@ function Nav() {
           <li>Custom orders</li>
         </Link>
 
+        <Link to='/'>
+          <li>Log out</li>
+        </Link>
       </ul>
     </nav>
   );
