@@ -1,5 +1,9 @@
 # group-06
 
+## Demo Video
+Here is our demo video showcasing our project, its possibilities and its features.
+[Group-06 Demo Video](https://www.youtube.com/watch?v=GzjEKr8GAPo)
+
 ## Running The Application
 To run the application you must have node.js installed.
 https://nodejs.org/
@@ -17,7 +21,7 @@ https://nodejs.org/
 
 ### Starting SMCE
 To connect with SMCE you should compile the sketch smartcar.ino which is in the folder arduino/smartcar/ in the project directory.
-https://github.com/ItJustWorksTM/smce-gd/wiki 
+For further instruction visit the [SMCE repos wiki](https://github.com/ItJustWorksTM/smce-gd/wiki)
 
 ### Connecting SMCE with the web app
 If you are running a local MQTT broker you should be ready to control the car as long as websockets are enabled on the broker.
@@ -50,5 +54,25 @@ The cars are going to be controlled by personnel on a remote location and in cas
 
 Built with React, Javascript and C++.
 With a PostgreSQL database and MQTT for communicating with the car.
+
+## Project Structure
+
+The sketch for the car resides in arduino\smartcar from the base of the project
+and the yaml files for the CI are in .github\workflows.
+
+The rest of the project resides in the src folder which we have split up in several folders;
+
+\Backend contains the backend part of our project which is were we connect to our database 
+
+
+\Components contains the GUI, the pages of the application and its smaller components.
+
+\Css contains CSS belonging to the different components
+
+The base of the src folder contains some business logic such as the MqttController which enables us to connect to the SMART car.
+
+
+
+
 
 
